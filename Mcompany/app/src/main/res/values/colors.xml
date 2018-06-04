@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+
+    <color name="place_holder_color">#f3e7e7</color>
+
+    <!--Black Colors-->
+    <color name="bw_1">#000000</color>
+    <color name="bw_2">#151515</color>
+    <color name="bw_3">#2C2C2C</color>
+    <color name="bw_4">#444444</color>
+    <color name="bw_5">#5B5B5B</color>
+    <color name="bw_6">#717171</color>
+    <color name="bw_7">#888888</color>
+    <color name="bw_8">#9F9F9F</color>
+    <color name="bw_9">#B7B7B7</color>
+    <color name="bw_10">#CECECE</color>
+    <color name="bw_11">#E4E4E4</color>
+    <color name="bw_12">#FFFFFF</color>
+    <color name="bw_13">#111111</color>
+
+    <!--Grey Scales-->
+    <color name="gs_1">#858689</color>
+    <color name="gs_2">#8F9194</color>
+    <color name="gs_3">#2C2C2C</color>
+    <color name="gs_4">#9B9C9F</color>
+    <color name="gs_5">#B0B1B4</color>
+    <color name="gs_6">#BABCBD</color>
+    <color name="gs_7">#C5C6C7</color>
+    <color name="gs_8">#D1D2D2</color>
+    <color name="gs_9">#DCDDDF</color>
+    <color name="gs_10">#E6E8E9</color>
+    <color name="gs_11">#F2F3F3</color>
+    <color name="gs_12">#E8E8E8</color>
+    <color name="gs_13">#F6F7F8</color>
+    <color name="gs_14">#F6F7F8</color>
+    <color name="gs_15">#FDFDFD</color>
+    <color name="gs_16">#F7F7F7</color>
+    <color name="gs_17">#D0D0D0</color>
 </resources>

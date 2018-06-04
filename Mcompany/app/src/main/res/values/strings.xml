@@ -6,4 +6,40 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="one">one</string>
+
+
+    <!--Font Styles-->
+    <string name="regular">regular</string>
+    <string name="bold">bold</string>
+    <string name="bold_italic">bold_italic</string>
+    <string name="italic">italic</string>
+    <string name="light">light</string>
+    <string name="light_italic">light_italic</string>
+    <string name="medium">medium</string>
+    <string name="medium_italic">medium_italic</string>
+
+    <string name="search_deal">Search Deal</string>
+
+
+    <!--Server Error message-->
+    <string name="mcom_err_01_no_network">Network not available</string>
+    <string name="mcom_err_02_server">Server error</string>
+    <string name="mcom_err_03_timeout">Timeout error</string>
+    <string name="mcom_err_04_operational">Operational error</string>
+
+
+    <!--custom Error message -->
+    <string name="mcom_err_05_login_again">Please login again to Continue</string>
+    <string name="mcom_err_06_invalid_credential">Unable to login, Invalid Credentials</string>
+    <string name="mcom_err_07_user_not_reg">Username not registered</string>
+    <string name="mcom_err_08_username_exists">Username already used</string>
+    <string name="mcom_err_09_incorrect_password">Current Password incorrect</string>
+    <string name="mcom_err_10_recheck_cart_items">Please enter a valid coupon</string>
+    <string name="mcom_err_11_user_not_logged_in">User not logged in</string>
+    <string name="mcom_err_12_fb_log_in_result_null">Facebook Login result is null</string>
+    <string name="mcom_err_13_fb_user_cancelled">User cancelled.</string>
+    <string name="mcom_err_14_invalid_cart_response">Invalid Cart Response: Without cart id</string>
+    <string name="mcom_err_15_user_not_exist">Cannot find user with uid</string>
+    <string name="mcom_log_16_error_ref_access_token">Unable to refresh access token : </string>
 </resources>
