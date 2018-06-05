@@ -16,7 +16,7 @@ import com.mcompany.coupan.appcommon.constants.AuthConstants;
 import com.mcompany.coupan.appcommon.constants.Constants;
 import com.mcompany.coupan.appcommon.logger.AppLogger;
 import com.mcompany.coupan.appcommon.utility.Utility;
-import com.mcompany.coupan.models.EmptyDataModel;
+import com.mcompany.coupan.dtos.EmptyDataModel;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;

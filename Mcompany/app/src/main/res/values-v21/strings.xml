@@ -1,4 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="one">one</string>
+    <string name="one">Errors occurred during the build.
+Errors running builder ""Integrated External Tool Builder"" on project .
+The builder launch configuration could not be found.
+The builder launch configuration could not be found.
+Errors running builder ""Integrated External Tool Builder"" on project ""customercouponfacades"".
+The builder launch configuration could not be found.
+The builder launch configuration could not be found.
+Errors running builder ""Integrated External Tool Builder"" on project ""timedaccesspromotionenginesamplesaddon"".
+The builder launch configuration could not be found.
+The builder launch configuration could not be found.
+Errors running builder ""Integrated External Tool Builder"" on project ""timedaccesspromotionengineaddon"".
+The builder launch configuration could not be found.
+The builder launch configuration could not be found.
+Errors running builder ""Integrated External Tool Builder"" on project ""sapdigitalpaymentb2baddon"".
+The builder launch configuration could not be found.
+The builder launch configuration could not be found.
+Errors running builder ""Integrated External Tool Builder"" on project ""marketplacepromotionenginesamplesaddon"".
+The builder launch configuration could not be found.
+The builder launch configuration could not be found.
+Errors running builder ""Integrated External Tool Builder"" on project ""marketplacebackofficesamplesaddon"".
+The builder launch configuration could not be found.
+The builder launch configuration could not be found.
+Errors running builder ""Integrated External Tool Builder"" on project ""customercouponsamplesaddon"".
+The builder launch configuration could not be found.
+The builder launch configuration could not be found.
+Errors running builder ""Integrated External Tool Builder"" on project ""chinesepspwechatpaysamplesaddon"".
+The builder launch configuration could not be found.
+The builder launch configuration could not be found.
+Errors running builder ""Integrated External Tool Builder"" on project ""chinesepspalipaysamplesaddon"".
+The builder launch configuration could not be found.
+The builder launch configuration could not be found.
+Errors running builder ""Java Builder"" on project ""secureportaladdon"".
+no glb for , public class de.hybris.platform.processengine.model.BusinessProcessModel
+	extends de.hybris.platform.core.model.ItemModel
+/*   fields   */
+public static final [unresolved] Unresolved type java.lang.String _TYPECODE
+public static final [unresolved] Unresolved type java.lang.String CODE
+public static final [unresolved] Unresolved type java.lang.String PROCESSDEFINITIONNAME
+public static final [unresolved] Unresolved type java.lang.String PROCESSDEFINITIONVERSION
+public static final [unresolved] Unresolved type java.lang.String STATE
+public static final [unresolved] Unresolved type java.lang.String PROCESSSTATE
+public static final [unresolved] Unresolved type java.lang.String ENDMESSAGE
+public static final [unresolved] Unresolved type java.lang.String USER
+public static final [unresolved] Unresolved type java.lang.String CURRENTTASKS
+public static final [unresolved] Unresolved type java.lang.String CONTEXTPARAMETERS
+public static final [unresolved] Unresolved type java.lang.String TASKLOGS
+public static final [unresolved] Unresolved type java.lang.String EMAILS </string>
 </resources>

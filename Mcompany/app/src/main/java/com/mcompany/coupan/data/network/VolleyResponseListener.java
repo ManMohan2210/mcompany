@@ -16,8 +16,8 @@ import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.constants.Constants;
 import com.mcompany.coupan.appcommon.logger.AppLogger;
 import com.mcompany.coupan.appcommon.utility.Utility;
-import com.mcompany.coupan.models.EachErrorModel;
-import com.mcompany.coupan.models.ErrorModel;
+import com.mcompany.coupan.dtos.EachErrorModel;
+import com.mcompany.coupan.dtos.ErrorModel;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

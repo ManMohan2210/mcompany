@@ -8,9 +8,9 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.VolleyLog;
 import com.mcompany.coupan.appcommon.logger.AppLogger;
 import com.mcompany.coupan.appcommon.utility.Utility;
-import com.mcompany.coupan.models.EachErrorModel;
-import com.mcompany.coupan.models.ErrorModel;
-import com.mcompany.coupan.models.FileUploadData;
+import com.mcompany.coupan.dtos.EachErrorModel;
+import com.mcompany.coupan.dtos.ErrorModel;
+import com.mcompany.coupan.dtos.FileUploadData;
 
 import org.json.JSONObject;
 

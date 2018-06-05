@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Mcompany Deals</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -8,6 +8,15 @@
     <string name="action_settings">Settings</string>
     <string name="one">one</string>
 
+    <string name = "deals">Deals</string>
+    <string name="near_deals">Near Me</string>
+
+    <string name = "deals_best">Best Deals</string>
+    <string name="deals_foods">Food Deals</string>
+    <string name = "deals_movies">Movies Deals</string>
+    <string name="deals_travel">Travel Deals</string>
+    <string name = "deals_fashion">Fashion Deals</string>
+    <string name="deals_electronic">Electronic Deals</string>
 
     <!--Font Styles-->
     <string name="regular">regular</string>

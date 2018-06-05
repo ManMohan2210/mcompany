@@ -4,7 +4,7 @@ import android.text.TextUtils;
 import com.mcompany.coupan.appcommon.constants.AuthConstants;
 import com.mcompany.coupan.appcommon.constants.Constants;
 import com.mcompany.coupan.appcommon.global.PreferencesManager;
-import com.mcompany.coupan.models.OauthResponseModel;
+import com.mcompany.coupan.dtos.OauthResponseModel;
 import java.util.WeakHashMap;
 
 /**

@@ -1,4 +1,4 @@
-package com.mcompany.coupan;
+package com.mcompany.coupan.ui;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 
-import com.mcompany.coupan.models.AppConfigReqModel;
+import com.mcompany.coupan.dtos.AppConfigReqModel;
 
 
 public class McompApplication extends Application {

@@ -1,7 +1,7 @@
 package com.mcompany.coupan.data.network;
 
 
-import com.mcompany.coupan.models.ErrorModel;
+import com.mcompany.coupan.dtos.ErrorModel;
 
 /**
  * Interface which is used to update UI after Network operation has finished

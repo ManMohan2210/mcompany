@@ -15,8 +15,8 @@ import com.mcompany.coupan.BuildConfig;
 import com.mcompany.coupan.appcommon.constants.AuthConstants;
 import com.mcompany.coupan.appcommon.constants.Constants;
 import com.mcompany.coupan.appcommon.logger.AppLogger;
-import com.mcompany.coupan.models.EmptyDataModel;
-import com.mcompany.coupan.models.FileUploadData;
+import com.mcompany.coupan.dtos.EmptyDataModel;
+import com.mcompany.coupan.dtos.FileUploadData;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

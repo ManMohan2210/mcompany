@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_search_parent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/all_rounded_rectangle_stroke_border"
-    android:padding="@dimen/dim_20_dp">
+    android:padding="@dimen/dim_10_dp">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iv_line_icon"

@@ -15,7 +15,7 @@ import com.mcompany.coupan.BuildConfig;
 import com.mcompany.coupan.appcommon.constants.AuthConstants;
 import com.mcompany.coupan.appcommon.constants.Constants;
 import com.mcompany.coupan.appcommon.logger.AppLogger;
-import com.mcompany.coupan.models.EmptyDataModel;
+import com.mcompany.coupan.dtos.EmptyDataModel;
 
 import org.json.JSONObject;
 

@@ -1,7 +1,7 @@
 package com.mcompany.coupan.data.network;
 
 
-import com.mcompany.coupan.models.ErrorModel;
+import com.mcompany.coupan.dtos.ErrorModel;
 
 /**
  * Created by manmohansingh on 13-06-2017.

@@ -1,4 +1,4 @@
-package com.mcompany.coupan.models;
+package com.mcompany.coupan.dtos;
 
 import android.os.Parcel;
 import android.os.Parcelable;

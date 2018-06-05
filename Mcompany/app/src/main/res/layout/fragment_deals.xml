@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <ir.apend.slider.ui.Slider
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:animateIndicators="true"
+        app:defaultIndicators="circle"
+        app:indicatorSize="8dp"
+        app:intervalSecond="5"
+        app:loopSlides="true" />
+
+    <com.mcompany.coupan.views.AppTextView
+        android:id="@+id/tv_deals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/slider"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dim_10_dp"
+        android:layout_marginTop="@dimen/dim_10_dp"
+        android:text="@string/deals"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_large"
+        app:fontFamily="@string/light"
+        app:fontName="regular"
+        />
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_category_deals"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_deals"
+        app:tabGravity="fill"
+        app:tabMode="scrollable" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab_category_deals"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</RelativeLayout>
