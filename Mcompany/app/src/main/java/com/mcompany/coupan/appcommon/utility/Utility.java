@@ -1,10 +1,13 @@
 package com.mcompany.coupan.appcommon.utility;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.InputFilter;
 import android.text.Spannable;
@@ -25,6 +28,7 @@ import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.constants.Constants;
 import com.mcompany.coupan.appcommon.listeners.GlideImageLoadListener;
 import com.mcompany.coupan.appcommon.logger.AppLogger;
+import com.mcompany.coupan.ui.McompApplication;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -316,5 +320,9 @@ public class Utility {
             AppLogger.d(TAG, Log.getStackTraceString(ex));
         }
         return encodedString;
+    }
+
+    public static boolean isLocationPermissionGraneted(){
+        return (ActivityCompat.checkSelfPermission(McompApplication.getInstance().getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(McompApplication.getInstance().getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 }

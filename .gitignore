@@ -52,3 +52,4 @@ project.properties
 ##Gradle-based build
 .gradle
 build/
+Mcompany/app/src/main/java/com/mcompany/coupan/MainActivity.java
