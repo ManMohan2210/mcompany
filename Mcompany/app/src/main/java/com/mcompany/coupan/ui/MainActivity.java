@@ -2,23 +2,22 @@ package com.mcompany.coupan.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.mcompany.coupan.R;
 import com.mcompany.coupan.ui.adapters.ViewPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     @BindView(R.id.toolbar)
@@ -33,8 +32,8 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
 
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
+//    @BindView(R.id.fab)
+//    FloatingActionButton fab;
 
 
     @Override
@@ -63,15 +62,15 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
 
 
     private void setFAB() {
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent intent = new Intent(MainActivity.this, TabActivity.class);
-                startActivity(intent);
-            }
-        });
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//                Intent intent = new Intent(MainActivity.this, TabActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     public void setTabLayout() {
@@ -97,6 +96,25 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         } else {
             super.onBackPressed();
         }
+    }
+
+    @OnClick(R.id.iv_search_icon)
+    public void handleSearchIconClick() {
+        launchSerchActivity();
+    }
+
+    @OnClick(R.id.atv_search_label)
+    public void handleSearchLabelClick() {
+        launchSerchActivity();
+    }
+
+    public void launchSerchActivity() {
+        startActivity(new Intent(MainActivity.this, SearchActivity.class));
+    }
+
+    @OnClick(R.id.iv_line_icon)
+    public void handleDrawerOpenClick() {
+        drawer.openDrawer(Gravity.LEFT);
     }
 
 //    @Override

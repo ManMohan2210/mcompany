@@ -62,7 +62,7 @@ public class NearDealsFragment extends BaseFragment implements OnMapReadyCallbac
                 List<Location> locations = new ArrayList<>(1);
                 Location loc1 = new Location("dummyprovider1");
                 loc1.setLatitude(28.4909262);
-                loc1.setLongitude(77.0696101);
+                    loc1.setLongitude(77.0696101);
 
                 Location loc2 = new Location("dummyprovider2");
                 loc2.setLatitude(28.4900420);

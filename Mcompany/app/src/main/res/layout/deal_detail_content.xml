@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_deal_detail">
+
+    <com.mcompany.coupan.views.AppTextView
+        android:id="@+id/tv_best_deals_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_deals_image"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/dim_16_dp"
+        android:text="Make My trip Offers On air Tickets: Grab Rs 800 Off On Domestic Flights"
+        android:textColor="@color/bw_5"
+        android:textSize="@dimen/text_large"
+        app:fontFamily="@string/light"
+        app:fontName="light" />
+
+</android.support.v4.widget.NestedScrollView>

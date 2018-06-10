@@ -1,4 +1,4 @@
-package com.mcompany.coupan.data.network;
+package com.mcompany.coupan.data.network.volley;
 
 /**
  * Created by manmohansingh on 20-04-2017.

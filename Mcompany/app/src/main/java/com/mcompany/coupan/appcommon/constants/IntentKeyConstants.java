@@ -1,8 +1,6 @@
 package com.mcompany.coupan.appcommon.constants;
 
-/**
- * Created by sujeetsingh on 31-03-2017.
- */
+
 
 public interface IntentKeyConstants {
     String EXTRA_PRODUCT = "extra_product";
@@ -174,4 +172,7 @@ public interface IntentKeyConstants {
     String VOICEBUTTONCLICK="voiceCLick";
 
     String EXTRA_FROM_SEARCHPAGE = "fromSearch";
+
+
+    String EXTRA_DEAL_DATA = "extra_deal_data";
 }

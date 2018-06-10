@@ -1,18 +1,23 @@
+
 package com.mcompany.coupan.dtos;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.Parcelable.Creator;
 
-public class Deal implements Parcelable {
+public class Deal implements Parcelable
+{
 
+    private String rank;
     private String code;
     private String endDate;
     private String message;
     private String imageUrl;
     public final static Creator<Deal> CREATOR = new Creator<Deal>() {
 
+
         @SuppressWarnings({
-                "unchecked"
+            "unchecked"
         })
         public Deal createFromParcel(Parcel in) {
             return new Deal(in);
@@ -22,9 +27,11 @@ public class Deal implements Parcelable {
             return (new Deal[size]);
         }
 
-    };
+    }
+    ;
 
     protected Deal(Parcel in) {
+        this.rank = ((String) in.readValue((String.class.getClassLoader())));
         this.code = ((String) in.readValue((String.class.getClassLoader())));
         this.endDate = ((String) in.readValue((String.class.getClassLoader())));
         this.message = ((String) in.readValue((String.class.getClassLoader())));
@@ -32,6 +39,14 @@ public class Deal implements Parcelable {
     }
 
     public Deal() {
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
     }
 
     public String getCode() {
@@ -67,6 +82,7 @@ public class Deal implements Parcelable {
     }
 
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(rank);
         dest.writeValue(code);
         dest.writeValue(endDate);
         dest.writeValue(message);
@@ -74,6 +90,7 @@ public class Deal implements Parcelable {
     }
 
     public int describeContents() {
-        return 0;
+        return  0;
     }
+
 }

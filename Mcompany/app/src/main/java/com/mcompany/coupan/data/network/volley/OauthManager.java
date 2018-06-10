@@ -1,4 +1,4 @@
-package com.mcompany.coupan.data.network;
+package com.mcompany.coupan.data.network.volley;
 
 import android.text.TextUtils;
 import com.mcompany.coupan.appcommon.constants.AuthConstants;
