@@ -1,4 +1,4 @@
-package com.mcompany.coupan.ui;
+package com.mcompany.coupan.ui.dealdetails;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import com.mcompany.coupan.appcommon.constants.IntentKeyConstants;
 import com.mcompany.coupan.appcommon.listeners.GlideImageLoadListener;
 import com.mcompany.coupan.appcommon.utility.Utility;
 import com.mcompany.coupan.dtos.Deal;
+import com.mcompany.coupan.ui.base.AppBaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.mcompany.coupan.ui;
+package com.mcompany.coupan.ui.dealfragment;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.mcompany.coupan.R;
+import com.mcompany.coupan.ui.base.BaseFragment;
+import com.mcompany.coupan.ui.bestdealfragment.BestDealsFragment;
+import com.mcompany.coupan.ui.OneFragment;
 import com.mcompany.coupan.ui.adapters.ViewPagerAdapter;
 
 import java.util.ArrayList;

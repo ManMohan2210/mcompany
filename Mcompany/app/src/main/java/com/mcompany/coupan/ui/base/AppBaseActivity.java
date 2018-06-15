@@ -1,4 +1,4 @@
-package com.mcompany.coupan.ui;
+package com.mcompany.coupan.ui.base;
 
 import android.app.Activity;
 import android.app.Dialog;

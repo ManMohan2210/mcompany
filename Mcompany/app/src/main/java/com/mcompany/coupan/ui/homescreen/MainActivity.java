@@ -1,4 +1,4 @@
-package com.mcompany.coupan.ui;
+package com.mcompany.coupan.ui.homescreen;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.mcompany.coupan.R;
+import com.mcompany.coupan.ui.base.AppBaseActivity;
+import com.mcompany.coupan.ui.dealfragment.DealsFragment;
+import com.mcompany.coupan.ui.neardealfragment.NearDealsFragment;
+import com.mcompany.coupan.ui.search.SearchActivity;
 import com.mcompany.coupan.ui.adapters.ViewPagerAdapter;
 
 import butterknife.BindView;

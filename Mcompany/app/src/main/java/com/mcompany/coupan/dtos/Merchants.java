@@ -10,10 +10,7 @@ import java.util.List;
 public class Merchants implements Parcelable
 {
 
-    private String id;
-    private String name;
-    private Address address;
-    private List<Deal> deals = new ArrayList<Deal>();
+    private List<Merchant> merchants = new ArrayList<Merchant>();
     public final static Creator<Merchants> CREATOR = new Creator<Merchants>() {
 
 
@@ -32,52 +29,22 @@ public class Merchants implements Parcelable
     ;
 
     protected Merchants(Parcel in) {
-        this.id = ((String) in.readValue((String.class.getClassLoader())));
-        this.name = ((String) in.readValue((String.class.getClassLoader())));
-        this.address = ((Address) in.readValue((Address.class.getClassLoader())));
-        in.readList(this.deals, (Deal.class.getClassLoader()));
+        in.readList(this.merchants, (Merchant.class.getClassLoader()));
     }
 
     public Merchants() {
     }
 
-    public String getId() {
-        return id;
+    public List<Merchant> getMerchants() {
+        return merchants;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public List<Deal> getDeals() {
-        return deals;
-    }
-
-    public void setDeals(List<Deal> deals) {
-        this.deals = deals;
+    public void setMerchants(List<Merchant> merchants) {
+        this.merchants = merchants;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(name);
-        dest.writeValue(address);
-        dest.writeList(deals);
+        dest.writeList(merchants);
     }
 
     public int describeContents() {

@@ -1,4 +1,4 @@
-package com.mcompany.coupan.ui;
+package com.mcompany.coupan.ui.neardealfragment;
 
 import android.location.Location;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.utility.CurrentLocationManager;
+import com.mcompany.coupan.ui.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

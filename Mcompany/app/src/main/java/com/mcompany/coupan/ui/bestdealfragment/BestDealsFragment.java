@@ -1,4 +1,4 @@
-package com.mcompany.coupan.ui;
+package com.mcompany.coupan.ui.bestdealfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.google.firebase.database.DatabaseError;
 import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.constants.IntentKeyConstants;
 import com.mcompany.coupan.appcommon.listeners.RecyclerItemClickListener;
 import com.mcompany.coupan.dtos.Deal;
+import com.mcompany.coupan.dtos.Merchant;
+import com.mcompany.coupan.dtos.Merchants;
+import com.mcompany.coupan.ui.base.BaseFragment;
+import com.mcompany.coupan.ui.dealdetails.DealsDetailActivity;
 import com.mcompany.coupan.ui.adapters.DealsAdapter;
 import com.mcompany.coupan.ui.adapters.GridSpacingItemDecoration;
 
@@ -22,15 +28,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class BestDealsFragment extends BaseFragment {
+public class BestDealsFragment extends BaseFragment implements BestDealContractor.BestDealView {
 
     private Unbinder mUnbinder;
 
     @BindView(R.id.recycler_view_best_deals)
     RecyclerView recyclerViewBestDeals;
 
+    @BindView(R.id.progressbar_bestdeal)
+    ProgressBar progressBar;
+
     private DealsAdapter adapter;
     private List<Deal> bestDealList;
+    private GridSpacingItemDecoration gridSpacingItemDecoration;
+    BestDealContractor.BestDealPresenter bestDealPresenter;
 
     public BestDealsFragment() {
         // Required empty public constructor
@@ -46,32 +57,41 @@ public class BestDealsFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_best_deals, container, false);
         mUnbinder = ButterKnife.bind(this, view);
-
+        bestDealPresenter = new BestDealPresenterImpl(this);
+        bestDealPresenter.fetchData();
         bestDealList = new ArrayList<>();
+        gridSpacingItemDecoration = new GridSpacingItemDecoration(mActivity, 2, 10, true);
         createData();
+        setViewData();
+        return view;
+    }
+
+    private void setViewData() {
         adapter = new DealsAdapter(mActivity, bestDealList);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mActivity);
         recyclerViewBestDeals.setLayoutManager(mLayoutManager);
-        recyclerViewBestDeals.addItemDecoration(new GridSpacingItemDecoration(mActivity, 2, 10, true));
+        recyclerViewBestDeals.removeItemDecoration(gridSpacingItemDecoration);
+        recyclerViewBestDeals.addItemDecoration(gridSpacingItemDecoration);
 //        recyclerViewBestDeals.setItemAnimator(new DefaultItemAnimator());
         recyclerViewBestDeals.setAdapter(adapter);
 
         recyclerViewBestDeals.addOnItemTouchListener(
-                new RecyclerItemClickListener(mActivity, recyclerViewBestDeals ,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
+                new RecyclerItemClickListener(mActivity, recyclerViewBestDeals, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
                         Deal deal = bestDealList.get(position);
                         Intent intent = new Intent(mActivity, DealsDetailActivity.class);
-                        intent.putExtra(IntentKeyConstants.EXTRA_DEAL_DATA,deal);
+                        intent.putExtra(IntentKeyConstants.EXTRA_DEAL_DATA, deal);
                         startActivity(intent);
                     }
 
-                    @Override public void onLongItemClick(View view, int position) {
+                    @Override
+                    public void onLongItemClick(View view, int position) {
                         // do whatever
                     }
                 })
         );
-        return view;
     }
 
     public void createData() {
@@ -124,4 +144,28 @@ public class BestDealsFragment extends BaseFragment {
         mUnbinder.unbind();
     }
 
+    @Override
+    public void onSuccess(Merchants merchants) {
+        bestDealList.clear();
+        for (Merchant merchant : merchants.getMerchants()) {
+
+            bestDealList.addAll(merchant.getDeals());
+        }
+        setViewData();
+    }
+
+    @Override
+    public void onError(DatabaseError databaseError) {
+
+    }
+
+    @Override
+    public void setShowLoader() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setHideLoader() {
+        progressBar.setVisibility(View.GONE);
+    }
 }

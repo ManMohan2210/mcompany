@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 
+import com.mcompany.coupan.data.network.firebase.FirebaseManager;
 import com.mcompany.coupan.dtos.AppConfigReqModel;
 
 
@@ -31,6 +32,7 @@ public class McompApplication extends Application {
         super.onCreate();
         mInstance = this;
         mContext = getApplicationContext();
+        FirebaseManager.initialize();
 
         /*NewRelic.withApplicationToken(
                 getResources().getString(R.string.new_relic)

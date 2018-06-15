@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.constants.Constants;
+import com.mcompany.coupan.ui.base.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

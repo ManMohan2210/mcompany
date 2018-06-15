@@ -1,4 +1,4 @@
-package com.mcompany.coupan.ui;
+package com.mcompany.coupan.ui.search;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.mcompany.coupan.R;
 import com.mcompany.coupan.dtos.Deal;
+import com.mcompany.coupan.ui.base.AppBaseActivity;
 import com.mcompany.coupan.ui.adapters.GridSpacingItemDecoration;
 import com.mcompany.coupan.ui.adapters.MyRecyclerAdapter;
 

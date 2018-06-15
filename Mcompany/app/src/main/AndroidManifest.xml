@@ -25,7 +25,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.homescreen.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -39,11 +39,11 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.SearchActivity"
+            android:name=".ui.search.SearchActivity"
             android:label="@string/search_deal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.DealsDetailActivity"
+            android:name=".ui.dealdetails.DealsDetailActivity"
             android:label="@string/search_deal"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
