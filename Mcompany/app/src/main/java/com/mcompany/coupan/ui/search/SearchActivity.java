@@ -1,18 +1,28 @@
 package com.mcompany.coupan.ui.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
-import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseError;
 import com.mcompany.coupan.R;
+import com.mcompany.coupan.appcommon.constants.IntentKeyConstants;
+import com.mcompany.coupan.appcommon.listeners.RecyclerItemClickListener;
+import com.mcompany.coupan.appcommon.utility.Utility;
 import com.mcompany.coupan.dtos.Deal;
-import com.mcompany.coupan.ui.base.AppBaseActivity;
+import com.mcompany.coupan.dtos.Merchant;
+import com.mcompany.coupan.dtos.Merchants;
 import com.mcompany.coupan.ui.adapters.GridSpacingItemDecoration;
 import com.mcompany.coupan.ui.adapters.MyRecyclerAdapter;
+import com.mcompany.coupan.ui.base.AppBaseActivity;
+import com.mcompany.coupan.ui.dealdetails.DealsDetailActivity;
+import com.mcompany.coupan.views.AppTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,28 +30,37 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppBaseActivity {
+public class SearchActivity extends AppBaseActivity implements SearchDealContractor.SearchDealView{
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
     @BindView(R.id.recycler_view_search)
     RecyclerView mRecyclerView;
 
-    @BindView(R.id.emptyView)
-    TextView mEmptyView;
+    @BindView(R.id.apptv_emptyscreenview)
+    AppTextView appTextViewEmptyScreen;
 
     @BindView(R.id.searchview)
     SearchView mSearchView;
 
-    private List<Deal> bestDealList;
+    @BindView(R.id.progressbar_search)
+    ProgressBar progressBar;
+
+
+    private List<Deal> mListAllDeal;
 
     private MyRecyclerAdapter mAdapter;
+
+    private GridSpacingItemDecoration gridSpacingItemDecoration;
+    private SearchDealContractor.SearchDealPresenter searchDealPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
+        searchDealPresenter = new SearchDealPresenterImpl(this);
+        gridSpacingItemDecoration = new GridSpacingItemDecoration(this, 2, 10, true);
 
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_back);
@@ -49,57 +68,46 @@ public class SearchActivity extends AppBaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(this, 2, 10, true));
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        bestDealList = new ArrayList<>();
-        createData();
-        mAdapter = new MyRecyclerAdapter(this, bestDealList);
-        mRecyclerView.setAdapter(mAdapter);
+        mListAllDeal = new ArrayList<>();
+        searchDealPresenter.fetchData();
+//        setViewData();
     }
 
-    public void createData() {
-        Deal deal = new Deal();
-        deal.setMessage("Making Offers in air Tickets : Grab Rs 800 off on Domestic flights");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages5.shoppersstop.com/sys-master/images/h1d/h78/11070618828830/app_20180601_HOMEWARE.jpg");
-        bestDealList.add(deal);
+    private void setViewData() {
 
-        deal = new Deal();
-        deal.setMessage("GrabOn-Medlife Exclusive: Get Up To 30% OFF On Medicines + Flat 70% eCash Points");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages2.shoppersstop.com/sys-master/root/h6d/hc9/11048830107678/app_2018052_topsNtees.jpg");
-        bestDealList.add(deal);
+        if(Utility.isCollectionNullOrEmpty(mListAllDeal)){
+            appTextViewEmptyScreen.setVisibility(View.VISIBLE);
+            return;
+        }else {
+            appTextViewEmptyScreen.setVisibility(View.GONE);
+        }
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mRecyclerView.setHasFixedSize(true);
 
-        deal = new Deal();
-        deal.setMessage("Father's Day - Upto 60% OFF On Fashion, Gadgets, Health, Books, Accessories & More");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages4.shoppersstop.com/sys-master/images/h84/hd1/11044924358686/banner_only%26veromoda_static_20180525_app.jpg");
-        bestDealList.add(deal);
+        mRecyclerView.removeItemDecoration(gridSpacingItemDecoration);
+        mRecyclerView.addItemDecoration(gridSpacingItemDecoration);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        deal = new Deal();
-        deal.setMessage("25th Anniversary Celebration Sale: Book Flight Ticket & Win Exciting Prizes");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages2.shoppersstop.com/sys-master/images/he5/hc4/11044923375646/casio-app_20180525.jpg");
-        bestDealList.add(deal);
+//        createData();
+        mAdapter = new MyRecyclerAdapter(this, mListAllDeal);
+        mRecyclerView.setAdapter(mAdapter);
 
-        deal = new Deal();
-        deal.setMessage("NNNOW Clearance Sale: Get Flat 50% - 60% OFF On Both Men & Women's Fashion");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages3.shoppersstop.com/sys-master/root/h15/ha7/11048836726814/App_watches_20180523.jpg");
-        bestDealList.add(deal);
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Deal deal = mListAllDeal.get(position);
+                        Intent intent = new Intent(SearchActivity.this, DealsDetailActivity.class);
+                        intent.putExtra(IntentKeyConstants.EXTRA_DEAL_DATA, deal);
+                        startActivity(intent);
+                    }
 
-        deal = new Deal();
-        deal.setMessage("Goomo Summer Sale: Flat Rs 1000 OFF On Domestic Flight Tickets");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages5.shoppersstop.com/sys-master/root/h59/h34/10974954422302/banner_app_20180507_carousal_grid_edhardy.jpg");
-        bestDealList.add(deal);
-
-        deal = new Deal();
-        deal.setMessage("Goomo Summer Sale: Flat Rs 1000 OFF On Domestic Flight Tickets");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages2.shoppersstop.com/sys-master/images/hc4/h77/10812822061086/app_20180323_-30%25_carousal_grid_louis-philleps.jpg");
-        bestDealList.add(deal);
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
     }
 
     @Override
@@ -125,5 +133,35 @@ public class SearchActivity extends AppBaseActivity {
         });
 
         return false;//super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onSuccess(Merchants merchants) {
+        mListAllDeal.clear();
+
+        if (null != merchants) {
+            List<Merchant> merchantList = merchants.getMerchants();
+            if (!Utility.isCollectionNullOrEmpty(merchantList)) {
+                for (Merchant merchant : merchants.getMerchants()) {
+                    mListAllDeal.addAll(merchant.getDeals());
+                }
+            }
+        }
+        setViewData();
+    }
+
+    @Override
+    public void onError(DatabaseError databaseError) {
+        showToast(databaseError.getMessage());
+    }
+
+    @Override
+    public void setShowLoader() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setHideLoader() {
+        progressBar.setVisibility(View.GONE);
     }
 }

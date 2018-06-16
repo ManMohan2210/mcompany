@@ -36,7 +36,10 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
 
-//    @BindView(R.id.fab)
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+
+   //    @BindView(R.id.fab)
 //    FloatingActionButton fab;
 
 
@@ -60,7 +63,6 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -163,7 +165,6 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

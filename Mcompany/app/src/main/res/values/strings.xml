@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mcompany Deals</string>
+    <string name="app_name">M Company Deals</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -19,6 +19,7 @@
     <string name="deals_electronic">Electronic Deals</string>
     <string name="permission_denied">Permission Denied</string>
     <string name="under_development">Under Development</string>
+    <string name="you_are_her">You are Here!</string>
 
     <!--Font Styles-->
     <string name="regular">regular</string>
@@ -32,6 +33,8 @@
 
     <string name="search_deal">Search Deal</string>
     <string name="no_deal_available">Sorry !\nNo deals Available for now</string>
+
+    <string name="no_search_results">No results Found!</string>
 
 
     <!--Server Error message-->

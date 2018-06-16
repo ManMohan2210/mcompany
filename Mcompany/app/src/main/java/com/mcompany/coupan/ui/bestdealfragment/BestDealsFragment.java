@@ -149,7 +149,7 @@ public class BestDealsFragment extends BaseFragment implements BestDealContracto
 
     @Override
     public void onError(DatabaseError databaseError) {
-
+showToast(databaseError.getMessage());
     }
 
     @Override

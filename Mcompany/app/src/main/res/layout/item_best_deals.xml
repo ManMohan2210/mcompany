@@ -22,7 +22,7 @@
 
         <com.mcompany.coupan.views.AppTextView
             android:id="@+id/tv_best_deals_label"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_deals_image"
             android:layout_centerVertical="true"

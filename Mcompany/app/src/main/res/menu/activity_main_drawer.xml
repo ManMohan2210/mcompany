@@ -5,33 +5,66 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:id="@+id/nav_bestdeal"
+            android:icon="@drawable/ic_best_deal_black_24dp"
             android:title="Import" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_food_deals"
+            android:icon="@drawable/ic_local_dining_black_24dp"
             android:title="Gallery" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_movies_deals"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Slideshow" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_travel_deals"
+            android:icon="@drawable/ic_flight_black_24dp"
+            android:title="Travels" />
+
+        <item
+            android:id="@+id/nav_fashion_deals"
             android:icon="@drawable/ic_menu_manage"
+            android:title="Tools" />
+
+        <item
+            android:id="@+id/nav_electronic_deals"
+            android:icon="@drawable/ic_phonelink_ring_black_24dp"
             android:title="Tools" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
+                android:id="@+id/nav_notification"
+                android:icon="@drawable/ic_notifications_none_black_24dp"
+                android:title="Share the  App" />
+
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Settings" />
+            <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Share the  App" />
+
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_rate_app"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Rate the  App" />
+
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Rate the  App" />
+            <item
+                android:id="@+id/nav_help_n_support"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Help and Support" />
+            <item
+                android:id="@+id/nav_signin"
+                android:icon="@drawable/ic_menu_send"
+                android:title="SignIn" />
         </menu>
     </item>
 
