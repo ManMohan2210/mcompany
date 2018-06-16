@@ -40,7 +40,7 @@
             android:layout_below="@id/tv_best_deals_label"
             android:layout_margin="@dimen/dim_5_dp"
             android:text="Ends on 30 Jun 2018"
-            android:textColor="@color/bw_7"
+            android:textColor="@color/colorRed"
             android:textSize="@dimen/text_small_large"
             app:fontFamily="@string/light"
             app:fontName="light" />

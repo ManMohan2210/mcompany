@@ -14,6 +14,8 @@ import com.mcompany.coupan.ui.base.BaseFragment;
 import com.mcompany.coupan.ui.bestdealfragment.BestDealsFragment;
 import com.mcompany.coupan.ui.OneFragment;
 import com.mcompany.coupan.ui.adapters.ViewPagerAdapter;
+import com.mcompany.coupan.ui.fooddeals.FoodDealsFragment;
+import com.mcompany.coupan.ui.moviedeals.MovieDealsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +75,7 @@ public class DealsFragment extends BaseFragment {
         slideList.add(new Slide(2, "https://sslimages4.shoppersstop.com/sys-master/images/h84/hd1/11044924358686/banner_only%26veromoda_static_20180525_app.jpg", getResources().getDimensionPixelSize(R.dimen.slider_image_corner)));
         slideList.add(new Slide(3, "https://sslimages2.shoppersstop.com/sys-master/images/he5/hc4/11044923375646/casio-app_20180525.jpg", getResources().getDimensionPixelSize(R.dimen.slider_image_corner)));
 
+
         slider.setItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -92,27 +95,24 @@ public class DealsFragment extends BaseFragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         Fragment fragment = new BestDealsFragment();
         adapter.addFrag(fragment, getString(R.string.deals_best));
-//        ((BestDealsFragment) fragment).setName(getString(R.string.deals_best));
 
-        fragment = new OneFragment();
+        fragment = new FoodDealsFragment();
         adapter.addFrag(fragment, getString(R.string.deals_foods));
-        ((OneFragment) fragment).setName(getString(R.string.deals_foods));
 
-        fragment = new OneFragment();
+        fragment = new MovieDealsFragment();
         adapter.addFrag(fragment, getString(R.string.deals_movies));
-        ((OneFragment) fragment).setName(getString(R.string.deals_movies));
 
         fragment = new OneFragment();
         adapter.addFrag(fragment, getString(R.string.deals_travel));
-        ((OneFragment) fragment).setName(getString(R.string.deals_travel));
+        ((OneFragment) fragment).setName(getString(R.string.deals_travel) +"\n" +getString(R.string.under_development));
 
         fragment = new OneFragment();
         adapter.addFrag(fragment, getString(R.string.deals_fashion));
-        ((OneFragment) fragment).setName(getString(R.string.deals_fashion));
+        ((OneFragment) fragment).setName(getString(R.string.deals_fashion) +"\n" +getString(R.string.under_development));
 
         fragment = new OneFragment();
         adapter.addFrag(fragment, getString(R.string.deals_electronic));
-        ((OneFragment) fragment).setName(getString(R.string.deals_electronic));
+        ((OneFragment) fragment).setName(getString(R.string.deals_electronic) +"\n" +getString(R.string.under_development));
 
         viewPager.setAdapter(adapter);
     }

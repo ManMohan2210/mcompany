@@ -9,6 +9,8 @@
 
     <color name="place_holder_color">#f3e7e7</color>
 
+
+    <color name="colorRed">#ed5443</color>
     <!--Black Colors-->
     <color name="bw_1">#000000</color>
     <color name="bw_2">#151515</color>

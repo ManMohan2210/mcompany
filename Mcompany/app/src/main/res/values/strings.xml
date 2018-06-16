@@ -17,6 +17,8 @@
     <string name="deals_travel">Travel Deals</string>
     <string name="deals_fashion">Fashion Deals</string>
     <string name="deals_electronic">Electronic Deals</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="under_development">Under Development</string>
 
     <!--Font Styles-->
     <string name="regular">regular</string>
@@ -29,6 +31,7 @@
     <string name="medium_italic">medium_italic</string>
 
     <string name="search_deal">Search Deal</string>
+    <string name="no_deal_available">Sorry !\nNo deals Available for now</string>
 
 
     <!--Server Error message-->

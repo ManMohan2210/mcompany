@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +14,18 @@ import com.google.firebase.database.DatabaseError;
 import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.constants.IntentKeyConstants;
 import com.mcompany.coupan.appcommon.listeners.RecyclerItemClickListener;
+import com.mcompany.coupan.appcommon.utility.Utility;
 import com.mcompany.coupan.dtos.Deal;
 import com.mcompany.coupan.dtos.Merchant;
 import com.mcompany.coupan.dtos.Merchants;
-import com.mcompany.coupan.ui.base.BaseFragment;
-import com.mcompany.coupan.ui.dealdetails.DealsDetailActivity;
 import com.mcompany.coupan.ui.adapters.DealsAdapter;
 import com.mcompany.coupan.ui.adapters.GridSpacingItemDecoration;
+import com.mcompany.coupan.ui.base.BaseFragment;
+import com.mcompany.coupan.ui.dealdetails.DealsDetailActivity;
+import com.mcompany.coupan.views.AppTextView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -38,10 +42,14 @@ public class BestDealsFragment extends BaseFragment implements BestDealContracto
     @BindView(R.id.progressbar_bestdeal)
     ProgressBar progressBar;
 
+    @BindView(R.id.apptv_emptyscreenview)
+    AppTextView appTextViewEmptyScreen;
+
     private DealsAdapter adapter;
     private List<Deal> bestDealList;
     private GridSpacingItemDecoration gridSpacingItemDecoration;
-    BestDealContractor.BestDealPresenter bestDealPresenter;
+    private BestDealContractor.BestDealPresenter bestDealPresenter;
+    private int mBestDealThreshold;
 
     public BestDealsFragment() {
         // Required empty public constructor
@@ -61,19 +69,23 @@ public class BestDealsFragment extends BaseFragment implements BestDealContracto
         bestDealPresenter.fetchData();
         bestDealList = new ArrayList<>();
         gridSpacingItemDecoration = new GridSpacingItemDecoration(mActivity, 2, 10, true);
-        createData();
-        setViewData();
         return view;
     }
 
     private void setViewData() {
+        if(Utility.isCollectionNullOrEmpty(bestDealList)){
+            appTextViewEmptyScreen.setVisibility(View.VISIBLE);
+            return;
+        }else {
+            appTextViewEmptyScreen.setVisibility(View.GONE);
+        }
+        recyclerViewBestDeals.setVisibility(View.VISIBLE);
         adapter = new DealsAdapter(mActivity, bestDealList);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mActivity);
         recyclerViewBestDeals.setLayoutManager(mLayoutManager);
         recyclerViewBestDeals.removeItemDecoration(gridSpacingItemDecoration);
         recyclerViewBestDeals.addItemDecoration(gridSpacingItemDecoration);
-//        recyclerViewBestDeals.setItemAnimator(new DefaultItemAnimator());
         recyclerViewBestDeals.setAdapter(adapter);
 
         recyclerViewBestDeals.addOnItemTouchListener(
@@ -94,49 +106,6 @@ public class BestDealsFragment extends BaseFragment implements BestDealContracto
         );
     }
 
-    public void createData() {
-        Deal deal = new Deal();
-        deal.setMessage("Making Offers in air Tickets : Grab Rs 800 off on Domestic flights");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages5.shoppersstop.com/sys-master/images/h1d/h78/11070618828830/app_20180601_HOMEWARE.jpg");
-        bestDealList.add(deal);
-
-        deal = new Deal();
-        deal.setMessage("Making Offers in air Tickets : Grab Rs 800 off on Domestic flights");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages2.shoppersstop.com/sys-master/root/h6d/hc9/11048830107678/app_2018052_topsNtees.jpg");
-        bestDealList.add(deal);
-
-        deal = new Deal();
-        deal.setMessage("Making Offers in air Tickets : Grab Rs 800 off on Domestic flights");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages4.shoppersstop.com/sys-master/images/h84/hd1/11044924358686/banner_only%26veromoda_static_20180525_app.jpg");
-        bestDealList.add(deal);
-
-        deal = new Deal();
-        deal.setMessage("Making Offers in air Tickets : Grab Rs 800 off on Domestic flights");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages2.shoppersstop.com/sys-master/images/he5/hc4/11044923375646/casio-app_20180525.jpg");
-        bestDealList.add(deal);
-
-        deal = new Deal();
-        deal.setMessage("Making Offers in air Tickets : Grab Rs 800 off on Domestic flights");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages3.shoppersstop.com/sys-master/root/h15/ha7/11048836726814/App_watches_20180523.jpg");
-        bestDealList.add(deal);
-
-        deal = new Deal();
-        deal.setMessage("Making Offers in air Tickets : Grab Rs 800 off on Domestic flights");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages5.shoppersstop.com/sys-master/root/h59/h34/10974954422302/banner_app_20180507_carousal_grid_edhardy.jpg");
-        bestDealList.add(deal);
-
-        deal = new Deal();
-        deal.setMessage("Making Offers in air Tickets : Grab Rs 800 off on Domestic flights");
-        deal.setEndDate("Ends on 31 Jun 2018");
-        deal.setImageUrl("https://sslimages2.shoppersstop.com/sys-master/images/hc4/h77/10812822061086/app_20180323_-30%25_carousal_grid_louis-philleps.jpg");
-        bestDealList.add(deal);
-    }
 
     @Override
     public void onDestroyView() {
@@ -147,11 +116,35 @@ public class BestDealsFragment extends BaseFragment implements BestDealContracto
     @Override
     public void onSuccess(Merchants merchants) {
         bestDealList.clear();
-        for (Merchant merchant : merchants.getMerchants()) {
 
-            bestDealList.addAll(merchant.getDeals());
+        if (null != merchants) {
+            List<Merchant> merchantList = merchants.getMerchants();
+            if (!Utility.isCollectionNullOrEmpty(merchantList)) {
+                for (Merchant merchant : merchants.getMerchants()) {
+                    bestDealList.addAll(merchant.getDeals());
+                    String threshold = merchant.getBestDealThreshold();
+                    if (!TextUtils.isEmpty(threshold)) {
+                        mBestDealThreshold = Integer.parseInt(threshold);
+                    }
+                }
+                filterBestDeals();
+            }
         }
         setViewData();
+    }
+
+    private void filterBestDeals() {
+        Iterator iterator = bestDealList.iterator();
+        while (iterator.hasNext()) {
+            Deal deal = (Deal) iterator.next();
+            String rankStr = deal.getRank();
+            if (!TextUtils.isEmpty(rankStr)) {
+                int rank = Integer.parseInt(rankStr);
+                if (rank < mBestDealThreshold) {
+                    iterator.remove();
+                }
+            }
+        }
     }
 
     @Override

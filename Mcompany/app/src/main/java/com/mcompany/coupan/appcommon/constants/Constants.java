@@ -20,6 +20,9 @@ public interface Constants {
 
     String SESSION_TIME_OUT_RECEIVER = "com.mcompany.coupan.CUSTOM_INTENT";
 
+    String DEAL_TYPE_MOVIES = "movies";
+    String DEAL_TYPE_FOOD = "food";
+
 }
 
 

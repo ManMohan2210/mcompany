@@ -26,6 +26,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 public class NearDealsFragment extends BaseFragment implements OnMapReadyCallback {
 
 
@@ -35,6 +38,9 @@ public class NearDealsFragment extends BaseFragment implements OnMapReadyCallbac
     @BindView(R.id.mapView)
     MapView mMapView;
 
+    private static final int PERMISSION_REQUEST_CODE = 200;
+    private  CurrentLocationManager.LocationResult mLocationResult;
+    private  CurrentLocationManager mMyLocation;
     public NearDealsFragment() { /* Required empty public constructor*/ }
 
     @Override
@@ -47,7 +53,6 @@ public class NearDealsFragment extends BaseFragment implements OnMapReadyCallbac
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_near_deals_maps, container, false);
         mUnbinder = ButterKnife.bind(this, view);
-        mMapView = (MapView) view.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         setMapView();
         mMapView.getMapAsync(this);
@@ -55,15 +60,15 @@ public class NearDealsFragment extends BaseFragment implements OnMapReadyCallbac
         return view;
     }
 
-    private void getLocation() {
-        CurrentLocationManager.LocationResult locationResult = new CurrentLocationManager.LocationResult() {
+    public void getLocation() {
+        mLocationResult = new CurrentLocationManager.LocationResult() {
             @Override
             public void gotLocation(Location location) {
                 //Got the location!
                 List<Location> locations = new ArrayList<>(1);
                 Location loc1 = new Location("dummyprovider1");
                 loc1.setLatitude(28.4909262);
-                    loc1.setLongitude(77.0696101);
+                loc1.setLongitude(77.0696101);
 
                 Location loc2 = new Location("dummyprovider2");
                 loc2.setLatitude(28.4900420);
@@ -90,9 +95,19 @@ public class NearDealsFragment extends BaseFragment implements OnMapReadyCallbac
 
                 drawMarkers(locations);
             }
+
+            @Override
+            public void requestPermission() {
+                NearDealsFragment.this.requestPermissions(new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION},PERMISSION_REQUEST_CODE);
+            }
+
+            @Override
+            public void permissionDenied() {
+                showToast(getString(R.string.permission_denied));
+            }
         };
-        CurrentLocationManager myLocation = new CurrentLocationManager();
-        myLocation.getLocation(mActivity, locationResult);
+        mMyLocation = new CurrentLocationManager();
+        mMyLocation.getLocation(mActivity, mLocationResult);
     }
 
     private void setMapView() {
@@ -142,5 +157,14 @@ public class NearDealsFragment extends BaseFragment implements OnMapReadyCallbac
 //        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         CameraPosition cameraPosition = new CameraPosition.Builder().target(center).zoom(zoomFactor).build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                mMyLocation.onRequestPermissionsResult(requestCode,permissions,grantResults);
+                break;
+        }
     }
 }

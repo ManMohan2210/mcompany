@@ -167,4 +167,9 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+      super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+    }
 }

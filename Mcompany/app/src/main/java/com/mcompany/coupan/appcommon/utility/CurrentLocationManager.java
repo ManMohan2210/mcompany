@@ -20,9 +20,12 @@ public class CurrentLocationManager {
     LocationResult locationResult;
     boolean gps_enabled = false;
     boolean network_enabled = false;
+    private static final int PERMISSION_REQUEST_CODE = 200;
+    private Context mContext;
 
-    public boolean getLocation(Context context, LocationResult result) {
-        //I use LocationResult callback class to pass location value from CurrentLocationManager to user code.
+
+    public void getLocation(Context context, LocationResult result) {
+        this.mContext = context;
         locationResult = result;
         if (lm == null)
             lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -39,25 +42,18 @@ public class CurrentLocationManager {
 
         //don't start listeners if no provider is enabled
         if (!gps_enabled && !network_enabled)
-            return false;
+            return;
 
         if (gps_enabled)
             if (ActivityCompat.checkSelfPermission(McompApplication.getInstance().getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(McompApplication.getInstance().getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return false;
+                result.requestPermission();
+                return;
             }
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGps);
         if (network_enabled)
             lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetwork);
         timer1 = new Timer();
         timer1.schedule(new GetLastLocation(), 20000);
-        return true;
     }
 
     LocationListener locationListenerGps = new LocationListener() {
@@ -105,32 +101,27 @@ public class CurrentLocationManager {
             Location net_loc = null, gps_loc = null;
             if (gps_enabled)
                 if (ActivityCompat.checkSelfPermission(McompApplication.getInstance().getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(McompApplication.getInstance().getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
+                    locationResult.requestPermission();
                     return;
-                }gps_loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if(network_enabled)
-                net_loc=lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                }
+            gps_loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (network_enabled)
+                net_loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
             //if there are both values use the latest one
-            if(gps_loc!=null && net_loc!=null){
-                if(gps_loc.getTime()>net_loc.getTime())
+            if (gps_loc != null && net_loc != null) {
+                if (gps_loc.getTime() > net_loc.getTime())
                     locationResult.gotLocation(gps_loc);
                 else
                     locationResult.gotLocation(net_loc);
                 return;
             }
 
-            if(gps_loc!=null){
+            if (gps_loc != null) {
                 locationResult.gotLocation(gps_loc);
                 return;
             }
-            if(net_loc!=null){
+            if (net_loc != null) {
                 locationResult.gotLocation(net_loc);
                 return;
             }
@@ -138,7 +129,29 @@ public class CurrentLocationManager {
         }
     }
 
-    public static abstract class LocationResult{
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0) {
+
+                    boolean fineLocationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean coarseLocationAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                    if (fineLocationAccepted && coarseLocationAccepted)
+                        getLocation(mContext, locationResult);
+                    else {
+                        locationResult.permissionDenied();
+                    }
+                }
+                break;
+        }
+    }
+
+    public static abstract class LocationResult {
         public abstract void gotLocation(Location location);
+
+        public abstract void requestPermission();
+
+        public abstract void permissionDenied();
     }
 }
