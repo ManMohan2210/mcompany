@@ -32,6 +32,7 @@
     <string name="medium_italic">medium_italic</string>
 
     <string name="search_deal">Search Deal</string>
+    <string name="deal_detail">Deal Detail</string>
     <string name="no_deal_available">Sorry !\nNo deals Available for now</string>
 
     <string name="no_search_results">Sorry !\n I didn\'t found any match</string>

@@ -40,7 +40,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.dealdetails.DealsDetailActivity"
-            android:label="@string/search_deal"
+            android:label="@string/deal_detail"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
