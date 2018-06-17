@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class OneFragment extends BaseFragment {
+public class DummyFragment extends BaseFragment {
 
     private Unbinder mUnbinder;
 
@@ -23,7 +23,7 @@ public class OneFragment extends BaseFragment {
     @BindView(R.id.tv_deal_type)
     TextView textView;
 
-    public OneFragment() {
+    public DummyFragment() {
         // Required empty public constructor
     }
 
@@ -33,15 +33,14 @@ public class OneFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_one, container, false);
         mUnbinder = ButterKnife.bind(this, view);
         setFragName();
         return view;
     }
 
-    public void setFragName(){
+    public void setFragName() {
         textView.setText(name);
     }
 

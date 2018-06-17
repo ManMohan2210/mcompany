@@ -13,6 +13,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.target.Target;
 import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.listeners.GlideImageLoadListener;
+import com.mcompany.coupan.appcommon.listeners.SearchQueryListener;
 import com.mcompany.coupan.appcommon.utility.Utility;
 import com.mcompany.coupan.dtos.Deal;
 import com.mcompany.coupan.views.AppTextView;
@@ -20,16 +21,18 @@ import com.mcompany.coupan.views.AppTextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> implements Filterable{
+public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> implements Filterable {
 
     private List<Deal> listItems, filterList;
     private Context mContext;
-    private  CustomFilter filter;
+    private CustomFilter filter;
+    private SearchQueryListener searchQueryListener;
 
-    public MyRecyclerAdapter(Context context, List<Deal> listItems) {
+    public MyRecyclerAdapter(Context context, List<Deal> listItems, SearchQueryListener listener) {
         this.listItems = listItems;
         this.mContext = context;
         this.filterList = new ArrayList<Deal>();
+        this.searchQueryListener = listener;
         // we copy the original list to the filter list and use it for setting row values
         this.filterList.addAll(this.listItems);
     }
@@ -116,15 +119,14 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     @Override
     public Filter getFilter() {
         // TODO Auto-generated method stub
-        if(filter == null)
-        {
-            filter=new CustomFilter();
+        if (filter == null) {
+            filter = new CustomFilter();
         }
 
         return filter;
     }
 
-     class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         public AppTextView dealMessage, dealEndsOn;
         public ImageView dealImage;
 
@@ -136,39 +138,34 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         }
     }
 
-    class CustomFilter extends Filter
-    {
+    class CustomFilter extends Filter {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             // TODO Auto-generated method stub
 
-            FilterResults results=new FilterResults();
+            FilterResults results = new FilterResults();
 
-            if(constraint != null && constraint.length()>0)
-            {
+            if (constraint != null && constraint.length() > 0) {
                 //CONSTARINT TO UPPER
-                constraint=constraint.toString().toUpperCase();
+                constraint = constraint.toString().toUpperCase();
 
-                ArrayList<Deal> filters=new ArrayList<Deal>();
+                ArrayList<Deal> filters = new ArrayList<Deal>();
 
                 //get specific items
-                for(int i=0;i<listItems.size();i++)
-                {
-                   Deal deal = listItems.get(i);
-                    if(deal.getMessage().toUpperCase().contains(constraint))
-                    {
+                for (int i = 0; i < listItems.size(); i++) {
+                    Deal deal = listItems.get(i);
+                    if (deal.getMessage().toUpperCase().contains(constraint)) {
                         filters.add(deal);
                     }
                 }
 
-                results.count=filters.size();
-                results.values=filters;
+                results.count = filters.size();
+                results.values = filters;
 
-            }else
-            {
-                results.count=listItems.size();
-                results.values=listItems;
+            } else {
+                results.count = listItems.size();
+                results.values = listItems;
 
             }
 
@@ -177,10 +174,13 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            // TODO Auto-generated method stub
-
-            filterList=(ArrayList<Deal>) results.values;
-            notifyDataSetChanged();
+            filterList = (ArrayList<Deal>) results.values;
+            if (Utility.isCollectionNullOrEmpty(filterList)) {
+                searchQueryListener.handleEmptyView(false);
+            } else {
+                searchQueryListener.handleEmptyView(true);
+                notifyDataSetChanged();
+            }
         }
 
     }

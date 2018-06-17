@@ -28,7 +28,7 @@ import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.constants.Constants;
 import com.mcompany.coupan.appcommon.listeners.GlideImageLoadListener;
 import com.mcompany.coupan.appcommon.logger.AppLogger;
-import com.mcompany.coupan.ui.McompApplication;
+import com.mcompany.coupan.ui.application.McompApplication;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;

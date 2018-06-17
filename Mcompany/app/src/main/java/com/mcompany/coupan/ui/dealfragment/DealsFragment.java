@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.mcompany.coupan.R;
+import com.mcompany.coupan.ui.DummyFragment;
 import com.mcompany.coupan.ui.base.BaseFragment;
 import com.mcompany.coupan.ui.bestdealfragment.BestDealsFragment;
-import com.mcompany.coupan.ui.OneFragment;
 import com.mcompany.coupan.ui.adapters.ViewPagerAdapter;
 import com.mcompany.coupan.ui.fooddeals.FoodDealsFragment;
 import com.mcompany.coupan.ui.moviedeals.MovieDealsFragment;
@@ -102,17 +102,17 @@ public class DealsFragment extends BaseFragment {
         fragment = new MovieDealsFragment();
         adapter.addFrag(fragment, getString(R.string.deals_movies));
 
-        fragment = new OneFragment();
+        fragment = new DummyFragment();
         adapter.addFrag(fragment, getString(R.string.deals_travel));
-        ((OneFragment) fragment).setName(getString(R.string.deals_travel) +"\n" +getString(R.string.under_development));
+        ((DummyFragment) fragment).setName(getString(R.string.deals_travel) +"\n" +getString(R.string.under_development));
 
-        fragment = new OneFragment();
+        fragment = new DummyFragment();
         adapter.addFrag(fragment, getString(R.string.deals_fashion));
-        ((OneFragment) fragment).setName(getString(R.string.deals_fashion) +"\n" +getString(R.string.under_development));
+        ((DummyFragment) fragment).setName(getString(R.string.deals_fashion) +"\n" +getString(R.string.under_development));
 
-        fragment = new OneFragment();
+        fragment = new DummyFragment();
         adapter.addFrag(fragment, getString(R.string.deals_electronic));
-        ((OneFragment) fragment).setName(getString(R.string.deals_electronic) +"\n" +getString(R.string.under_development));
+        ((DummyFragment) fragment).setName(getString(R.string.deals_electronic) +"\n" +getString(R.string.under_development));
 
         viewPager.setAdapter(adapter);
     }

@@ -39,7 +39,7 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-   //    @BindView(R.id.fab)
+    //    @BindView(R.id.fab)
 //    FloatingActionButton fab;
 
 
@@ -150,20 +150,22 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        showToastInCentre(getString(R.string.under_development));
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
+//        switch ()
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
+//        }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -171,6 +173,6 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-      super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

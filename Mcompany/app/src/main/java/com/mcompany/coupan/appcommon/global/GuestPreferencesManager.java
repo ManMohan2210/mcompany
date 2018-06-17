@@ -3,7 +3,7 @@ package com.mcompany.coupan.appcommon.global;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.mcompany.coupan.ui.McompApplication;
+import com.mcompany.coupan.ui.application.McompApplication;
 import com.mcompany.coupan.appcommon.constants.Constants;
 
 import java.util.Iterator;

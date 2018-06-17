@@ -9,7 +9,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
-import com.mcompany.coupan.ui.McompApplication;
+import com.mcompany.coupan.ui.application.McompApplication;
 
 import java.util.Timer;
 import java.util.TimerTask;

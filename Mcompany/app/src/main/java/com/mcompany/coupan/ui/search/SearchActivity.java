@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
@@ -14,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.constants.IntentKeyConstants;
 import com.mcompany.coupan.appcommon.listeners.RecyclerItemClickListener;
+import com.mcompany.coupan.appcommon.listeners.SearchQueryListener;
 import com.mcompany.coupan.appcommon.utility.Utility;
 import com.mcompany.coupan.dtos.Deal;
 import com.mcompany.coupan.dtos.Merchant;
@@ -30,7 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppBaseActivity implements SearchDealContractor.SearchDealView{
+public class SearchActivity extends AppBaseActivity implements SearchDealContractor.SearchDealView, SearchQueryListener {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
@@ -45,6 +48,9 @@ public class SearchActivity extends AppBaseActivity implements SearchDealContrac
 
     @BindView(R.id.progressbar_search)
     ProgressBar progressBar;
+
+    @BindView(R.id.iv_disappointed)
+    ImageView imageViewDisappointed;
 
 
     private List<Deal> mListAllDeal;
@@ -67,7 +73,7 @@ public class SearchActivity extends AppBaseActivity implements SearchDealContrac
         getSupportActionBar().show();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+        mSearchView.onActionViewExpanded();
         mListAllDeal = new ArrayList<>();
         searchDealPresenter.fetchData();
 //        setViewData();
@@ -75,11 +81,13 @@ public class SearchActivity extends AppBaseActivity implements SearchDealContrac
 
     private void setViewData() {
 
-        if(Utility.isCollectionNullOrEmpty(mListAllDeal)){
+        if (Utility.isCollectionNullOrEmpty(mListAllDeal)) {
             appTextViewEmptyScreen.setVisibility(View.VISIBLE);
+            imageViewDisappointed.setVisibility(View.VISIBLE);
             return;
-        }else {
+        } else {
             appTextViewEmptyScreen.setVisibility(View.GONE);
+            imageViewDisappointed.setVisibility(View.GONE);
         }
         mRecyclerView.setVisibility(View.VISIBLE);
         mRecyclerView.setHasFixedSize(true);
@@ -88,8 +96,7 @@ public class SearchActivity extends AppBaseActivity implements SearchDealContrac
         mRecyclerView.addItemDecoration(gridSpacingItemDecoration);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        createData();
-        mAdapter = new MyRecyclerAdapter(this, mListAllDeal);
+        mAdapter = new MyRecyclerAdapter(this, mListAllDeal, this);
         mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.addOnItemTouchListener(
@@ -112,11 +119,6 @@ public class SearchActivity extends AppBaseActivity implements SearchDealContrac
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.search, menu);
-//
-//        MenuItem mSearch = menu.findItem(R.id.action_search);
-//
-//        SearchView mSearchView = (SearchView) mSearch.getActionView();
         mSearchView.setQueryHint("Search");
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -127,11 +129,15 @@ public class SearchActivity extends AppBaseActivity implements SearchDealContrac
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mAdapter.getFilter().filter(newText);
+                if (null != mAdapter) {
+                    Filter filter = mAdapter.getFilter();
+                    if (null != filter) {
+                        filter.filter(newText);
+                    }
+                }
                 return true;
             }
         });
-
         return false;//super.onCreateOptionsMenu(menu);
     }
 
@@ -163,5 +169,16 @@ public class SearchActivity extends AppBaseActivity implements SearchDealContrac
     @Override
     public void setHideLoader() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void handleEmptyView(boolean isResultFound) {
+        if (isResultFound) {
+            imageViewDisappointed.setVisibility(View.GONE);
+            appTextViewEmptyScreen.setVisibility(View.GONE);
+        } else if (!isResultFound && appTextViewEmptyScreen.getVisibility() == View.GONE) {
+            appTextViewEmptyScreen.setVisibility(View.VISIBLE);
+            imageViewDisappointed.setVisibility(View.VISIBLE);
+        }
     }
 }

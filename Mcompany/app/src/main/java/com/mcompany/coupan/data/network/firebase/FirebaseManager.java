@@ -18,16 +18,12 @@ public class FirebaseManager {
         rootDbRef = database.getReference();
     }
 
-    public DatabaseReference getRootDbRef() {
-        return rootDbRef;
-    }
-
-    public void setRootDbRef(DatabaseReference rootDbRef) {
-        this.rootDbRef = rootDbRef;
-    }
-
     public static void fetchAllMerchants(final FirebaseEventListener firebaseEventListener) {
-        DatabaseReference ref = rootDbRef.child(DB_MERCHANTS);
+        DatabaseReference chieldRef = rootDbRef.child(DB_MERCHANTS);
+
+        /*
+         * Below method will be called only first time
+         */
         rootDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -40,6 +36,9 @@ public class FirebaseManager {
             }
         });
 
+        /*
+         * Below method will be called when data is get changed and  first time as well
+         */
         rootDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -51,9 +50,7 @@ public class FirebaseManager {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
-
-
-                // ...
+                firebaseEventListener.onCancelled(databaseError);
             }
         });
     }

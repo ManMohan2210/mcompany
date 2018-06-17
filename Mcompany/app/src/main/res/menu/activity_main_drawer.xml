@@ -7,29 +7,29 @@
         <item
             android:id="@+id/nav_bestdeal"
             android:icon="@drawable/ic_best_deal_black_24dp"
-            android:title="Import" />
+            android:title="Best Deals" />
         <item
             android:id="@+id/nav_food_deals"
             android:icon="@drawable/ic_local_dining_black_24dp"
-            android:title="Gallery" />
+            android:title="Food Deals" />
         <item
             android:id="@+id/nav_movies_deals"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Movie Deals" />
         <item
             android:id="@+id/nav_travel_deals"
             android:icon="@drawable/ic_flight_black_24dp"
-            android:title="Travels" />
+            android:title="Travel Deals" />
 
         <item
             android:id="@+id/nav_fashion_deals"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:icon="@drawable/ic_fashion"
+            android:title="Fashion Deals" />
 
         <item
             android:id="@+id/nav_electronic_deals"
             android:icon="@drawable/ic_phonelink_ring_black_24dp"
-            android:title="Tools" />
+            android:title="Electronic Deals" />
     </group>
 
     <item android:title="Communicate">
@@ -50,20 +50,20 @@
 
             <item
                 android:id="@+id/nav_rate_app"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_rate_app"
                 android:title="Rate the  App" />
 
             <item
                 android:id="@+id/nav_feedback"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Rate the  App" />
+                android:icon="@drawable/ic_feedback"
+                android:title="Feedback" />
             <item
                 android:id="@+id/nav_help_n_support"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_help"
                 android:title="Help and Support" />
             <item
                 android:id="@+id/nav_signin"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_signin"
                 android:title="SignIn" />
         </menu>
     </item>

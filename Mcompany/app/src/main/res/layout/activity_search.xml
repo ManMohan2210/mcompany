@@ -35,15 +35,25 @@
         android:layout_below="@+id/searchview"
         android:visibility="gone"/>
 
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_disappointed"
+        android:layout_width="@dimen/dim_50_dp"
+        android:layout_height="@dimen/dim_50_dp"
+        android:src="@drawable/ic_disappointed"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
     <com.mcompany.coupan.views.AppTextView
         android:id="@+id/apptv_emptyscreenview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/no_search_results"
+        android:layout_below="@+id/iv_disappointed"
         android:gravity="center"
         android:layout_centerInParent="true"
-        android:textColor="@color/colorRed"
-        android:textSize="@dimen/text_xx_large"
+        android:textColor="@color/bw_4"
+        android:textSize="@dimen/text_large"
         app:fontFamily="@string/light"
         app:fontName="light"
         android:visibility="gone"/>
