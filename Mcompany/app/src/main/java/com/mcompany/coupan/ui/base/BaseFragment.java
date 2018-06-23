@@ -39,17 +39,7 @@ public abstract class BaseFragment extends Fragment {
         (mActivity).showToast(resId);
     }
 
-    public void showLoader() {
-        (mActivity).showLoader();
 
-    }
-
-    public void hideLoader() {
-
-        if (mActivity != null) {
-            (mActivity).hideLoader();
-        }
-    }
 
 
     public void loadData() {

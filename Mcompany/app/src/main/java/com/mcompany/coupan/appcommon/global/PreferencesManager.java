@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 public class PreferencesManager {
-    private final static String PREF_FILE = "SSLPreference";
+    private final static String PREF_FILE = "SharedPreference";
 
     private SharedPreferences mSharedPreferences;
     private static volatile PreferencesManager sPreferencesManagerInstance;
@@ -172,7 +172,7 @@ public class PreferencesManager {
                 String value = (pair.getValue() != null) ? pair.getValue().toString() : Constants.EMPTY_STRING;
                 editor.putString(pair.getKey().toString(), value);
             }
-            it.remove(); // avoids a ConcurrentModificationException
+            it.remove();
         }
         return editor.commit();
     }
@@ -181,65 +181,4 @@ public class PreferencesManager {
         mSharedPreferences.edit().clear().commit();
     }
 
-    /**
-     * Check whether the product exist in the shared preference (Normally used to check whether product is in the
-     * user Wishlist.
-     * @param productCode
-     * @param productBase
-     * @return true if product exist, false otherwise.
-     */
-    public boolean isProductExist(String productCode, String productBase) {
-        return null != productCode && mSharedPreferences.contains(productCode);
-//        if (null != productBase && mSharedPreferences.contains(productBase)) {
-//            return true;
-//        }
-
-    }
-
-    /**
-     * return the productcode of the product and if product code is not saved then return product base product of the product.
-     * In some cases the productCode for the product is intechanged with productBase so we need to save both.
-     * @param productCode
-     * @param productBase
-     * @return
-     */
-    public String getProductSavedCode(String productCode, String productBase) {
-        String valueToReturn = mSharedPreferences.getString(productCode, null);
-        if (null == valueToReturn || 0 == valueToReturn.length()) {
-            valueToReturn = mSharedPreferences.getString(productBase, Constants.EMPTY_STRING);
-        }
-        return valueToReturn;
-    }
-
-    /**
-     * To add the product to wishlist we need to add both productCode and productBase.
-     * @param productCode
-     * @param productBase
-     */
-    public void saveProductCode(String productCode, String productBase) {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        if (null != productCode) {
-            editor.putString(productCode, productCode);
-        }
-        if (null != productBase) {
-            editor.putString(productBase, productBase);
-        }
-        editor.commit();
-    }
-
-    /**
-     * To remove the product from the wishlist we need to remove both the productcode and productBase.
-     * @param productCode
-     * @param productBase
-     */
-    public void removeSavedProductCode(String productCode, String productBase) {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        if (null != productCode) {
-            editor.remove(productCode);
-        }
-        if (null != productBase) {
-            editor.remove(productBase);
-        }
-        editor.commit();
-    }
 }

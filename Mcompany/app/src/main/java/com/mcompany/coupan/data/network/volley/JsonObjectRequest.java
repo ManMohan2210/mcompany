@@ -45,6 +45,16 @@ public class JsonObjectRequest<T> extends JsonRequest<T> {
      * <code>null</code>, <code>POST</code> otherwise.
      *
      * @see #JsonObjectRequest(Context, int, String, Class, JSONObject, NetworkVolleyListener, ErrorListener, Map,String,boolean)
+     * @param context
+     * @param method
+     * @param url
+     * @param tClass
+     * @param jsonRequest
+     * @param listener
+     * @param errorListener
+     * @param params
+     * @param tag
+     * @param isNeedAuthorization
      */
 
     public JsonObjectRequest(Context context, int method, String url, Class<T> tClass, JSONObject jsonRequest, NetworkVolleyListener listener, Response.ErrorListener errorListener, Map<String, String> params, String tag, boolean isNeedAuthorization) {

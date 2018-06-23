@@ -27,12 +27,10 @@ import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.utility.Utility;
 
 /**
- * The type App base activity.
+ * Created by manmohansingh on 10-06-2018.
  */
 public abstract class AppBaseActivity extends AppCompatActivity {
 
-    Dialog mAlertDialog;
-    ImageView view;
     private static final long MILLISEC = 1000;
     private static final long SEC = 60 * MILLISEC;
     private static final long MIN = 60 * SEC;
@@ -111,18 +109,6 @@ public abstract class AppBaseActivity extends AppCompatActivity {
     }
 
     /**
-     * @param msg message shown in toast
-     * @param mul is the multiple of 3.5 second
-     */
-    public void showToastInCentreForLongerDuration(String msg, int mul) {
-        for (int i = 0; i < mul; i++) {
-            Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-        }
-    }
-
-    /**
      * Show toast.
      *
      * @param msg      the msg
@@ -132,23 +118,6 @@ public abstract class AppBaseActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(this, msg, duration);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
-    }
-
-
-    public void showLoader() {
-        if (null != mAlertDialog) {
-            if (!mAlertDialog.isShowing()) {
-                mAlertDialog.show();
-            }
-        }
-    }
-
-    public void hideLoader() {
-        if (null != mAlertDialog) {
-            if (mAlertDialog.isShowing()) {
-                mAlertDialog.dismiss();
-            }
-        }
     }
 
 

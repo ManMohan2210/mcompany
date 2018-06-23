@@ -8,11 +8,6 @@ public interface Constants {
 
     //Error Handling Keys
     String ERR_INVALID_TOKEN = "InvalidTokenError";
-    String ERR_INVALID_GRANT = "InvalidGrantError";
-    String ERR_USER_NOT_REG = "UsernameNotFoundError";
-    String ERR_DUPLICATE_UID = "DuplicateUidError";
-    String ERR_PASS_MISS_MATCH = "PasswordMismatchError";
-    String ERR_NO_CHECK_CART = "NoCheckoutCartError";
 
     long MILLISEC = 1000;
     long SEC = 60 * MILLISEC;

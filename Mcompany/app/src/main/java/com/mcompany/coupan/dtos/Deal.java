@@ -4,6 +4,9 @@ package com.mcompany.coupan.dtos;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
+/**
+ * Created by manmohansingh on 10-06-2018.
+ */
 
 public class Deal implements Parcelable
 {

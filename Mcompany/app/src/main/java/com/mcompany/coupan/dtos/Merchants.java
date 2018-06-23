@@ -7,6 +7,10 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by manmohansingh on 10-06-2018.
+ */
+
 public class Merchants implements Parcelable
 {
 

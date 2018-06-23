@@ -1,21 +1,14 @@
 package com.mcompany.coupan.appcommon.utility;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.InputFilter;
-import android.text.Spannable;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
@@ -28,34 +21,14 @@ import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.constants.Constants;
 import com.mcompany.coupan.appcommon.listeners.GlideImageLoadListener;
 import com.mcompany.coupan.appcommon.logger.AppLogger;
-import com.mcompany.coupan.ui.application.McompApplication;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.regex.Pattern;
 
 public class Utility {
     private static final String TAG = Utility.class.getSimpleName();
     public static final String NETWORK_TAG = "networklog";
-    private static ColorDrawable mImagePlaceHolder = null;
-    private static HashMap<String, Spannable> spannableTextHashMap = new HashMap<>();
-
-    private static final String PATTERN_NAME = "^[a-zA-Z0-9-]+(?: +[a-zA-Z0-9-]+)+$";
-    private static final String PATTERN_PHONE = "^[6-9][0-9]{9}$";
-    private static final String PATTERN_FCCNAME = "[a-zA-Z][a-zA-Z ]+";
-    private static final String PATTERN_ORDERID = "[0-9]+";
-    public static Typeface tf = null;
-    public static long backgraoundTime, foregraoundTime;
-    public static String currentScreenName = Constants.EMPTY_STRING;
-
-    //for Span text
-    public static String mFontBold;
-    public static String mFontRegular;
-    public static Typeface mTfBold;
-    public static Typeface mTfRegular;
-    private static HashMap<String, Boolean> productAvailableAtStore;
 
     /**
      * Get width of device.
@@ -102,60 +75,6 @@ public class Utility {
         return isNullOrEmpty;
     }
 
-    /**
-     * Returns false if field left empty and if doesn't match with Patterns.EMAIL_ADDRESS
-     *
-     * @param email
-     * @return
-     */
-    public static boolean isValidEmail(String email) {
-        if (TextUtils.isEmpty(email)) {
-            return false;
-        }
-        final Pattern pattern = Patterns.EMAIL_ADDRESS;
-        return pattern.matcher(email).matches();
-
-    }
-
-    public static boolean isValidPassword(String pass) {
-        return !TextUtils.isEmpty(pass) && pass.length() >= 6;
-    }
-
-    /**
-     * Returns false for empty field, if all the characters are not digits, if the length of field is less than 5 and greater than 15
-     *
-     * @param orderNo
-     * @return
-     */
-    public static boolean isValidOrderID(String orderNo) {
-        return orderNo.length() > 4;
-    }
-
-    /**
-     * Returns false for empty field, if all the characters are not digits, if the length of field is less than 10
-     * And if phone is starts with 0,1,2,3,4,5,6.
-     *
-     * @param phoneNo
-     * @return
-     */
-
-    public static boolean isValidPhoneNo(String phoneNo) {
-        return !TextUtils.isEmpty(phoneNo) && Pattern.compile(PATTERN_PHONE).matcher(phoneNo).matches() && phoneNo.length() == 10;
-    }
-
-    public static boolean isValidNameOnCard(String strName) {
-        return !TextUtils.isEmpty(strName) && Pattern.compile(PATTERN_FCCNAME).matcher(strName.trim()).matches();
-    }
-
-    /**
-     * Check full name of user and return false if name is empty, name does not contain atleast one space.
-     *
-     * @param name
-     * @return
-     */
-    public static boolean isValidName(String name) {
-        return !TextUtils.isEmpty(name) && Pattern.compile(PATTERN_NAME).matcher(name.trim()).matches();
-    }
 
     /**
      * Load network image using image URL with Glide.
@@ -188,7 +107,6 @@ public class Utility {
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        AnimUtility.fadeInImageAnim(targetView);
                         if (listener != null) {
                             listener.onSuccess(resource, model, target);
                         }
@@ -214,27 +132,6 @@ public class Utility {
             return context.getResources().getColor(colorId);
         }
     }
-
-
-    public static String getDeviceDPI(Context context) {
-        String screenViewPort = null;
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        switch (metrics.densityDpi) {
-
-            case DisplayMetrics.DENSITY_LOW:
-                screenViewPort = "ViewPortSmall";
-                break;
-            case DisplayMetrics.DENSITY_MEDIUM:
-                screenViewPort = "ViewPortMedium";
-                break;
-            default:
-                screenViewPort = "ViewPortLarge";
-                break;
-        }
-        return screenViewPort;
-    }
-
-
 
 
     public static String concat(String... str) {
@@ -302,9 +199,5 @@ public class Utility {
             AppLogger.d(TAG, Log.getStackTraceString(ex));
         }
         return encodedString;
-    }
-
-    public static boolean isLocationPermissionGraneted(){
-        return (ActivityCompat.checkSelfPermission(McompApplication.getInstance().getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(McompApplication.getInstance().getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 }

@@ -4,6 +4,9 @@ package com.mcompany.coupan.dtos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Created by manmohansingh on 10-06-2018.
+ */
 public class Address implements Parcelable
 {
 
