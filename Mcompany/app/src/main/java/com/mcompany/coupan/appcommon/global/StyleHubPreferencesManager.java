@@ -107,11 +107,7 @@ public class StyleHubPreferencesManager {
      * @param key      - Key to look up in shared preferences.
      */
     public Boolean isKeyExist(String key){
-        if(mSharedPreferences.contains(key)){
-         return true;
-        }else {
-            return false;
-        }
+        return mSharedPreferences.contains(key);
     }
 
     /**

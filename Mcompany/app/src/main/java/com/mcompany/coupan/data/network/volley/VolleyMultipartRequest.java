@@ -56,7 +56,7 @@ public class VolleyMultipartRequest<T> extends Request<T> {
     }
 
     @Override
-    public Map<String, String> getHeaders() throws AuthFailureError {
+    public Map<String, String> getHeaders() {
         Map<String, String> headers = null;
         headers = new HashMap<String, String>(1);
         headers.put(AuthConstants.AUTHORIZATION, AuthConstants.BEARER + OauthManager.getInstance().getToken());

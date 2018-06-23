@@ -50,8 +50,8 @@ public class NetworkVolleyListener<T> implements Response.Listener<T>,
          * @param response
          * @param reqType
          */
-        public void onSuccess(T response, int reqType);
+        void onSuccess(T response, int reqType);
 
-        public void onError(VolleyError volleyError, int reqType);
+        void onError(VolleyError volleyError, int reqType);
     }
 }

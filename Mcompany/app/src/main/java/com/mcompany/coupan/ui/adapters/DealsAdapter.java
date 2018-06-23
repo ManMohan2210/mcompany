@@ -30,9 +30,9 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.MyViewHolder
 
         public MyViewHolder(View view) {
             super(view);
-            dealImage = (ImageView) view.findViewById(R.id.iv_deals_image);
-            dealMessage = (AppTextView) view.findViewById(R.id.tv_best_deals_label);
-            dealEndsOn = (AppTextView) view.findViewById(R.id.tv_best_deals_end_label);
+            dealImage = view.findViewById(R.id.iv_deals_image);
+            dealMessage = view.findViewById(R.id.tv_best_deals_label);
+            dealEndsOn = view.findViewById(R.id.tv_best_deals_end_label);
         }
     }
 

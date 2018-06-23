@@ -52,3 +52,5 @@ project.properties
 ##Gradle-based build
 .gradle
 build/
+google-services.json
+*.json

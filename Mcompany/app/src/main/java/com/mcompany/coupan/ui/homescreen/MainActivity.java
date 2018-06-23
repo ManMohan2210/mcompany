@@ -39,10 +39,6 @@ public class MainActivity extends AppBaseActivity implements NavigationView.OnNa
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-    //    @BindView(R.id.fab)
-//    FloatingActionButton fab;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

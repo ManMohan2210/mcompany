@@ -57,12 +57,12 @@ public class NetworkRequest<T> extends Request<T> {
 
 
     @Override
-    protected Map<String, String> getParams() throws AuthFailureError {
+    protected Map<String, String> getParams() {
         return mParams;
     }
 
     @Override
-    public Map<String, String> getHeaders() throws AuthFailureError {
+    public Map<String, String> getHeaders() {
         Map<String, String>  headers = null;
         if(mIsNeedAuthorization && !TextUtils.isEmpty(OauthManager.getInstance().getToken())){
             headers = new HashMap<String, String>(2);

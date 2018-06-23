@@ -84,10 +84,7 @@ public class Utility {
 
 
     public static boolean isStringNullOrEmpty(String str) {
-        if (str != null && !str.isEmpty()) {
-            return false;
-        }
-        return true;
+        return str == null || str.isEmpty();
     }
 
     public static String validateStringNull(String str) {
@@ -121,10 +118,7 @@ public class Utility {
     }
 
     public static boolean isValidPassword(String pass) {
-        if (TextUtils.isEmpty(pass) || pass.length() < 6) {
-            return false;
-        }
-        return true;
+        return !TextUtils.isEmpty(pass) && pass.length() >= 6;
     }
 
     /**
@@ -134,10 +128,7 @@ public class Utility {
      * @return
      */
     public static boolean isValidOrderID(String orderNo) {
-        if (orderNo.length() <= 4) {
-            return false;
-        }
-        return true;
+        return orderNo.length() > 4;
     }
 
     /**
@@ -149,17 +140,11 @@ public class Utility {
      */
 
     public static boolean isValidPhoneNo(String phoneNo) {
-        if (TextUtils.isEmpty(phoneNo) || !Pattern.compile(PATTERN_PHONE).matcher(phoneNo).matches() || phoneNo.length() != 10) {
-            return false;
-        }
-        return true;
+        return !TextUtils.isEmpty(phoneNo) && Pattern.compile(PATTERN_PHONE).matcher(phoneNo).matches() && phoneNo.length() == 10;
     }
 
     public static boolean isValidNameOnCard(String strName) {
-        if (TextUtils.isEmpty(strName) || !Pattern.compile(PATTERN_FCCNAME).matcher(strName.trim()).matches()) {
-            return false;
-        }
-        return true;
+        return !TextUtils.isEmpty(strName) && Pattern.compile(PATTERN_FCCNAME).matcher(strName.trim()).matches();
     }
 
     /**
@@ -169,10 +154,7 @@ public class Utility {
      * @return
      */
     public static boolean isValidName(String name) {
-        if (TextUtils.isEmpty(name) || !Pattern.compile(PATTERN_NAME).matcher(name.trim()).matches()) {
-            return false;
-        }
-        return true;
+        return !TextUtils.isEmpty(name) && Pattern.compile(PATTERN_NAME).matcher(name.trim()).matches();
     }
 
     /**

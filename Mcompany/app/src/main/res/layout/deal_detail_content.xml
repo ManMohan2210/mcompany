@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_deals_image"
         android:layout_centerVertical="true"
-        android:layout_margin="@dimen/dim_16_dp"
+        android:layout_margin="@dimen/dim_30_dp"
         android:text="Make My trip Offers On air Tickets: Grab Rs 800 Off On Domestic Flights"
         android:textColor="@color/bw_5"
         android:textSize="@dimen/text_large"

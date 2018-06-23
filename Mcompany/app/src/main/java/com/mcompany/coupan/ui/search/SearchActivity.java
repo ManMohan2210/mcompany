@@ -67,16 +67,32 @@ public class SearchActivity extends AppBaseActivity implements SearchDealContrac
         ButterKnife.bind(this);
         searchDealPresenter = new SearchDealPresenterImpl(this);
         gridSpacingItemDecoration = new GridSpacingItemDecoration(this, 2, 10, true);
-
-        setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.drawable.ic_back);
-        getSupportActionBar().show();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setToolBar();
         mSearchView.onActionViewExpanded();
         mListAllDeal = new ArrayList<>();
         searchDealPresenter.fetchData();
-//        setViewData();
+    }
+
+    private void setToolBar() {
+        setSupportActionBar(mToolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);//ic_back);
+        getSupportActionBar().show();
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void setViewData() {

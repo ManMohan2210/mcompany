@@ -110,11 +110,7 @@ public class PreferencesManager {
      * @param key - Key to look up in shared preferences.
      */
     public Boolean isKeyExist(String key) {
-        if (mSharedPreferences.contains(key)) {
-            return true;
-        } else {
-            return false;
-        }
+        return mSharedPreferences.contains(key);
     }
 
     /**
@@ -193,13 +189,10 @@ public class PreferencesManager {
      * @return true if product exist, false otherwise.
      */
     public boolean isProductExist(String productCode, String productBase) {
-        if (null != productCode && mSharedPreferences.contains(productCode)) {
-            return true;
-        }
+        return null != productCode && mSharedPreferences.contains(productCode);
 //        if (null != productBase && mSharedPreferences.contains(productBase)) {
 //            return true;
 //        }
-        return false;
 
     }
 

@@ -12,6 +12,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/AppTheme.NoActionBar"
         android:supportsRtl="true">
 
         <meta-data
@@ -26,8 +27,7 @@
 
         <activity
             android:name=".ui.homescreen.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,12 +36,9 @@
 
         <activity
             android:name=".ui.search.SearchActivity"
-            android:label="@string/search_deal"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/search_deal" />
         <activity
-            android:name=".ui.dealdetails.DealsDetailActivity"
-            android:label="@string/deal_detail"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ui.dealdetails.DealsDetailActivity"/>
     </application>
 
 </manifest>

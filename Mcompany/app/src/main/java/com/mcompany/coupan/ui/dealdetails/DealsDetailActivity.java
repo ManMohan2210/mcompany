@@ -3,9 +3,11 @@ package com.mcompany.coupan.ui.dealdetails;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -26,7 +28,8 @@ public class DealsDetailActivity extends AppBaseActivity {
     @BindView(R.id.iv_deal_detail)
     ImageView ivDealDtail;
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
+
 
     @BindView(R.id.fab_share)
     FloatingActionButton fab;
@@ -39,12 +42,33 @@ public class DealsDetailActivity extends AppBaseActivity {
 
         setContentView(R.layout.activity_deal_detail);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        setToolBar();
 
         mDeal = getIntent().getParcelableExtra(IntentKeyConstants.EXTRA_DEAL_DATA);
         if (mDeal != null) {
             setData();
         }
+    }
+
+    private void setToolBar() {
+        setSupportActionBar(mToolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);//ic_back);
+        getSupportActionBar().show();
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void setData() {
