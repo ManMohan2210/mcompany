@@ -14,7 +14,13 @@ public class FirebaseManager {
 
     public static void initialize() {
         // Write a message to the database
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        rootDbRef = database.getReference();
+    }
+
+    public static void initialize(FirebaseDatabase database) {
+        // Write a message to the database
         rootDbRef = database.getReference();
     }
 

@@ -3,7 +3,6 @@ package com.mcompany.coupan.ui.neardealfragment;
 import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,6 +12,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 import com.mcompany.coupan.R;
 import com.mcompany.coupan.appcommon.listeners.GlideImageLoadListener;
+import com.mcompany.coupan.appcommon.logger.AppLogger;
 import com.mcompany.coupan.appcommon.utility.Utility;
 import com.mcompany.coupan.dtos.Deal;
 import com.mcompany.coupan.views.AppTextView;
@@ -57,12 +57,12 @@ public class AppInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter {
                         0, new GlideImageLoadListener() {
                             @Override
                             public void onSuccess(GlideDrawable resource, String model, Target<GlideDrawable> target) {
-                                Log.d(TAG, "Image success");
+                                AppLogger.d(TAG, "Image success");
                             }
 
                             @Override
                             public void onFailed() {
-                                Log.d(TAG, "Fails to load image");
+                                AppLogger.d(TAG, "Fails to load image");
                             }
                         });
             }
