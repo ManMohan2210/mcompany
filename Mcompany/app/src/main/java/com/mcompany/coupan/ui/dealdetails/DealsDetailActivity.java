@@ -1,8 +1,11 @@
 package com.mcompany.coupan.ui.dealdetails;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,11 +16,13 @@ import android.widget.ImageView;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.target.Target;
 import com.mcompany.coupan.R;
+import com.mcompany.coupan.appcommon.constants.Constants;
 import com.mcompany.coupan.appcommon.constants.IntentKeyConstants;
 import com.mcompany.coupan.appcommon.listeners.GlideImageLoadListener;
 import com.mcompany.coupan.appcommon.utility.Utility;
 import com.mcompany.coupan.dtos.Deal;
 import com.mcompany.coupan.ui.base.AppBaseActivity;
+import com.mcompany.coupan.views.AppTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +38,15 @@ public class DealsDetailActivity extends AppBaseActivity {
 
     @BindView(R.id.fab_share)
     FloatingActionButton fab;
+
+    @BindView(R.id.tv_best_deals_detail)
+    AppTextView appTextViewDescription;
+
+    @BindView(R.id.tv_coupan_code)
+    AppTextView appTextViewCoupnaCode;
+
+    @BindView(R.id.tv_ends_date)
+    AppTextView atvEndDate;
 
     private Deal mDeal;
 
@@ -52,11 +66,13 @@ public class DealsDetailActivity extends AppBaseActivity {
 
     private void setToolBar() {
         setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(Constants.EMPTY_STRING);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        mToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);//ic_back);
-        getSupportActionBar().show();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        mToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        actionBar.show();
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +87,21 @@ public class DealsDetailActivity extends AppBaseActivity {
         return true;
     }
 
+    @OnClick(R.id.iv_coupan_code_copy)
+    public void onCodeCopy() {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("label", appTextViewCoupnaCode.getText());
+        clipboard.setPrimaryClip(clip);
+        showToastInCentre(getString(R.string.code_copied));
+    }
+
     private void setData() {
+        if (mDeal == null) {
+            return;
+        }
+        appTextViewDescription.setText(mDeal.getMessage());
+        appTextViewCoupnaCode.setText(mDeal.getCode());
+        atvEndDate.setText(mDeal.getEndDate());
         Utility.loadImage(this, ivDealDtail,
                 mDeal.getImageUrl(),
                 0, new GlideImageLoadListener() {
@@ -88,7 +118,7 @@ public class DealsDetailActivity extends AppBaseActivity {
 
     @OnClick(R.id.fab_share)
     public void sharePdpDetails() {
-        String message = mDeal.getMessage();
+        String message = mDeal.getMessage() + "\n Use code: " + mDeal.getCode();
         Intent share = new Intent(android.content.Intent.ACTION_SEND);
         share.setType("text/plain");
         share.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

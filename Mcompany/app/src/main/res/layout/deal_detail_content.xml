@@ -7,17 +7,79 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_deal_detail">
 
-    <com.mcompany.coupan.views.AppTextView
-        android:id="@+id/tv_best_deals_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/iv_deals_image"
-        android:layout_centerVertical="true"
-        android:layout_margin="@dimen/dim_30_dp"
-        android:text="Make My trip Offers On air Tickets: Grab Rs 800 Off On Domestic Flights"
-        android:textColor="@color/bw_5"
-        android:textSize="@dimen/text_large"
-        app:fontFamily="@string/light"
-        app:fontName="light" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dim_10_dp"
+            android:layout_marginRight="@dimen/dim_10_dp"
+            android:layout_marginTop="@dimen/dim_30_dp"
+            app:cardElevation="@dimen/dim_2_dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.mcompany.coupan.views.AppTextView
+                    android:id="@+id/tv_best_deals_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_deals_image"
+                    android:layout_margin="@dimen/dim_10_dp"
+                    android:textColor="@color/bw_5"
+                    android:textSize="@dimen/text_large"
+                    app:fontFamily="@string/light"
+                    app:fontName="light" />
+
+                <com.mcompany.coupan.views.AppTextView
+                    android:id="@+id/tv_ends_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_best_deals_detail"
+                    android:layout_margin="@dimen/dim_10_dp"
+                    android:textColor="@color/colorRed"
+                    android:textSize="@dimen/text_large"
+                    app:fontFamily="@string/light"
+                    app:fontName="light" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/cv_description"
+            android:layout_margin="@dimen/dim_10_dp"
+            app:cardElevation="@dimen/dim_2_dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.mcompany.coupan.views.AppTextView
+                    android:id="@+id/tv_coupan_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_margin="@dimen/dim_10_dp"
+                    android:textColor="@color/bw_8"
+                    android:textSize="@dimen/text_large"
+                    app:fontFamily="@string/light"
+                    app:fontName="light_italic" />
+
+                <ImageView
+                    android:id="@+id/iv_coupan_code_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_content_copy_black_24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="@dimen/dim_10_dp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

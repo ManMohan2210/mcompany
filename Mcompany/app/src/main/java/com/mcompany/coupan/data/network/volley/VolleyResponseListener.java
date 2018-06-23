@@ -231,19 +231,7 @@ public class VolleyResponseListener implements NetworkVolleyListener.onUpdateLis
     private static String formatError(Context context, EachErrorModel eachError) {
         String errorMessage = eachError.getMessage();
         if (eachError.getType() != null) {
-            if (Constants.ERR_INVALID_TOKEN.equals(eachError.getType())) {
-                errorMessage = context.getString(R.string.mcom_err_05_login_again);
-            } else if (Constants.ERR_INVALID_GRANT.equals(eachError.getType())) {
-                errorMessage = context.getString(R.string.mcom_err_06_invalid_credential);
-            } else if (Constants.ERR_USER_NOT_REG.equals(eachError.getType())) {
-                errorMessage = context.getString(R.string.mcom_err_07_user_not_reg);
-            } else if (Constants.ERR_DUPLICATE_UID.equals(eachError.getType())) {
-                errorMessage = context.getString(R.string.mcom_err_08_username_exists);
-            } else if (Constants.ERR_PASS_MISS_MATCH.equals(eachError.getType())) {
-                errorMessage = context.getString(R.string.mcom_err_09_incorrect_password);
-            } else if (Constants.ERR_NO_CHECK_CART.equals(eachError.getType())) {
-                errorMessage = context.getString(R.string.mcom_err_10_recheck_cart_items);
-            }
+
         }
         return errorMessage;
     }

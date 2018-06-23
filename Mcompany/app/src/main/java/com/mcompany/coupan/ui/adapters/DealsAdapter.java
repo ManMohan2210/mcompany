@@ -61,10 +61,6 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.MyViewHolder
                 0, new GlideImageLoadListener() {
                     @Override
                     public void onSuccess(GlideDrawable resource, String model, Target<GlideDrawable> target) {
-//                        if(mActualHeight < 0){
-//                            mActualHeight = Utility.getActualHeight(mActualWidth, resource.getIntrinsicHeight(), resource.getIntrinsicWidth());
-//                        }
-//                        holder.ivItemImage.getLayoutParams().height = mActualHeight;
                     }
 
                     @Override

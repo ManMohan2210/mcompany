@@ -1,5 +1,6 @@
 package com.mcompany.coupan.ui.neardealfragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -18,14 +19,18 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseError;
 import com.mcompany.coupan.R;
+import com.mcompany.coupan.appcommon.constants.IntentKeyConstants;
 import com.mcompany.coupan.appcommon.utility.CurrentLocationManager;
 import com.mcompany.coupan.dtos.Address;
+import com.mcompany.coupan.dtos.Deal;
 import com.mcompany.coupan.dtos.Merchant;
 import com.mcompany.coupan.dtos.Merchants;
 import com.mcompany.coupan.ui.base.BaseFragment;
+import com.mcompany.coupan.ui.dealdetails.DealsDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,35 +94,6 @@ public class NearDealsFragment extends BaseFragment implements OnMapReadyCallbac
             public void gotLocation(Location location) {
                 mCurrentLocation = location;
                 isCurrentLocationFetched = true;
-                //Got the location!
-//                List<Location> locations = new ArrayList<>(1);
-//                Location loc1 = new Location("dummyprovider1");
-//                loc1.setLatitude(28.4909262);
-//                loc1.setLongitude(77.0696101);
-//
-//                Location loc2 = new Location("dummyprovider2");
-//                loc2.setLatitude(28.4900420);
-//                loc2.setLongitude(77.067182);
-//
-//                Location loc3 = new Location("dummyprovider3");
-//                loc3.setLatitude(28.5077304);
-//                loc3.setLongitude(77.071280);
-//
-//                Location loc4 = new Location("dummyprovider4");
-//                loc4.setLatitude(28.5029031);
-//                loc4.setLongitude(77.0638775);
-//
-//                Location loc5 = new Location("dummyprovider5");
-//                loc5.setLatitude(28.5013757);
-//                loc5.setLongitude(77.0701646);
-//
-//                locations.add(location);
-//                locations.add(loc1);
-//                locations.add(loc2);
-//                locations.add(loc3);
-//                locations.add(loc4);
-//                locations.add(loc5);
-//
                 if (isCurrentLocationFetched && isDataFetched) {
                     drawMarkers();
                 }
@@ -171,26 +147,49 @@ public class NearDealsFragment extends BaseFragment implements OnMapReadyCallbac
                 }
                 LatLng currentLoc = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
                 MarkerOptions markerOptions = new MarkerOptions().position(currentLoc)
-                        .title(getString(R.string.you_are_her));
+                        .title(getString(R.string.you_are_here));
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_your_are_here);
                 Bitmap smallMarker = Bitmap.createScaledBitmap(largeIcon, 150, 150, false);
                 markerOptions.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
                 googleMap.addMarker(markerOptions);
 
+
                 final LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                int position = -1;
                 for (Merchant merchant : mListAllMerchant) {
+                    position++;
                     Address address = merchant.getAddress();
                     if (null != address) {
                         double lat = Double.parseDouble(address.getLatitude());
                         double longitude = Double.parseDouble(address.getLongitude());
                         LatLng sydney = new LatLng(lat, longitude);
-                        googleMap.addMarker(new MarkerOptions().position(sydney)
+                        Marker marker = googleMap.addMarker(new MarkerOptions().position(sydney)
                                 .title(merchant.getName()));
+                        Deal deal = merchant.getDeals().get(0);
+                        marker.setTag(deal);
                         LatLng meanLocation = new LatLng(lat, longitude);
                         builder.include(meanLocation);
                     }
-
                 }
+
+                AppInfoWindowGoogleMap customInfoWindow = new AppInfoWindowGoogleMap(getActivity());
+                googleMap.setInfoWindowAdapter(customInfoWindow);
+
+
+                googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    @Override
+                    public void onInfoWindowClick(Marker marker) {
+                        Object tag = marker.getTag();
+
+                        if (tag == null) {
+                            return;
+                        }
+                        Deal deal = (Deal) tag;
+                        Intent intent = new Intent(mActivity, DealsDetailActivity.class);
+                        intent.putExtra(IntentKeyConstants.EXTRA_DEAL_DATA, deal);
+                        startActivity(intent);
+                    }
+                });
                 int zoomFactor = 12 + 12 / mListAllMerchant.size();
 
                 final LatLngBounds bounds = builder.build();
@@ -199,7 +198,6 @@ public class NearDealsFragment extends BaseFragment implements OnMapReadyCallbac
                 LatLng center = new LatLng((ne.latitude + sw.latitude) / 2,
                         (ne.longitude + sw.longitude) / 2);
 
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(center).zoom(zoomFactor).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
@@ -223,12 +221,6 @@ public class NearDealsFragment extends BaseFragment implements OnMapReadyCallbac
         isDataFetched = true;
         if (null != merchants) {
             mListAllMerchant = merchants.getMerchants();
-//            List<Merchant> merchantList = merchants.getMerchants();
-//            if (!Utility.isCollectionNullOrEmpty(merchantList)) {
-//                for (Merchant merchant : merchants.getMerchants()) {
-//                    mListAllMerchant.addAll(merchant.getDeals());
-//                }
-//            }
         }
         setViewData();
     }
